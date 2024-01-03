@@ -74,7 +74,6 @@
         </div>
 
         <livewire:backend.home.sales-statistic :$type :$month :$year :$start_date :$end_date />
-        <livewire:backend.home.income-statistic :$type :$month :$year />
         <livewire:backend.home.last-transaction />
     </div>
 </div>

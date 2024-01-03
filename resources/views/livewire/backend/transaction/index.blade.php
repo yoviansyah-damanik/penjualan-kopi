@@ -175,6 +175,7 @@
                                         'py-1',
                                         'text-xs',
                                         'font-bold',
+                                        'dark:text-black',
                                     ])>
                                         {{ __(Str::headline($transaction->status)) }}
                                     </span>

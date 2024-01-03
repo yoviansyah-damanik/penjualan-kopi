@@ -38,14 +38,14 @@
             $transaction->status == \App\Enums\TransactionStatusType::Canceled,
     ])>
         <div class="flex flex-items lg:items-center">
-            <div class="hidden font-bold lg:block">
+            <div class="hidden text-lg font-bold lg:block">
                 #{{ $transaction->id }}
             </div>
-            <div class="px-2 py-[.125rem] text-xs text-orange-700 bg-orange-100 lg:ms-2 rounded-sm">
+            <div class="px-2 py-[.125rem] text-xs text-orange-700 bg-orange-100 lg:ms-2 rounded-lg">
                 {{ Carbon::parse($transaction->date)->translatedFormat('d M Y') }}
             </div>
         </div>
-        <div class="text-sm">
+        <div class="text-base">
             {{ __(Str::headline($transaction->status)) }}
         </div>
     </div>
@@ -92,26 +92,26 @@
             </div>
         </div>
     </div>
-    <div class="flex items-center justify-between px-4 py-1 border-t">
+    <div class="flex flex-col items-center justify-between px-4 py-3 text-sm border-t lg:text-base lg:flex-row">
         <div class="flex-none">
             <a href="{{ route('profile.history.detail', base64_encode($transaction->id)) }}"
                 wire:navigate>{{ __('See Transaction') }}</a>
         </div>
         @if ($transaction->delivery)
-            <div class="flex-none">
+            <div class="flex-none mt-3 lg:mt-0">
                 @if ($transaction->delivery->status == \App\Enums\DeliveryStatusType::OnDelivery)
                     <button
                         wire:confirm="{{ __('Are you sure you want to complete the :feature?', ['feature' => __('order')]) }}"
                         wire:click="complete"
-                        class="me-1 inline-block text-xs px-2 py-[.125rem] bg-green-700 hover:bg-green-950 duration-150 text-white rounded-sm">
+                        class="me-1 inline-block px-4 py-[.125rem] bg-green-700 hover:bg-green-950 duration-150 text-white rounded-lg">
                         {{ __('Complete the order') }}
                     </button>
-                    <div class="inline-block px-2 py-[.125rem] text-xs text-orange-700 bg-orange-100 rounded-sm">
+                    <div class="inline-block px-4 py-[.125rem] text-orange-700 bg-orange-100 rounded-lg">
                         {{ __('Estimated Arrival') }}:
                         {{ $transaction->delivery->created_at->addDays($transaction->shipping->estimation_day)->translatedFormat('d M Y') }}
                     </div>
                 @else
-                    <span class="text-xs py-[.125rem] px-2 text-green-700 bg-green-100 rounded-sm">
+                    <span class="py-[.125rem] px-4 text-green-700 bg-green-100 rounded-lg">
                         {{ __('Order has been received') }}
                     </span>
                 @endif

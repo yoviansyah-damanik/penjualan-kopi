@@ -18,18 +18,30 @@
         <div class="footer-widget pb-120">
             <div class="row">
                 <div class="w-4/5 md:w-3/5 lg:w-2/6">
-                    <div class="mt-12 footer-about wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+                    <div class="flex flex-col items-center w-full mx-auto mt-12 max-w-16 footer-about wow fadeIn"
+                        data-wow-duration="1s" data-wow-delay="0.2s">
                         <a class="inline-block mb-8 logo" href="{{ route('home') }}" wire:navigate>
                             <img src="{{ Vite::image('logo.png') }}" alt="logo" class="w-40">
                         </a>
-                        <p class="pb-10 pr-10 text-2xl font-bold leading-snug text-white ps-4">
+                        <p class="pb-10 text-2xl font-bold leading-snug text-white">
                             Sejak 1983
                         </p>
-                        <ul class="flex footer-social">
-                            <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-twitter-filled"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-instagram-filled"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                        <ul class="flex gap-6 text-white">
+                            <li>
+                                <a class="inline-block text-2xl duration-300" href="javascript:void(0)"><i
+                                        class="lni lni-facebook-filled"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="inline-block text-2xl duration-300" href="javascript:void(0)"><i
+                                        class="lni lni-twitter-filled"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="inline-block text-2xl duration-300" href="javascript:void(0)"><i
+                                        class="lni lni-instagram-filled"></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

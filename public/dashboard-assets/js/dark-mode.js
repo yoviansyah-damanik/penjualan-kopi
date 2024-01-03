@@ -8,6 +8,15 @@ if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localS
     themeToggleDarkIcon.classList.remove('hidden');
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    let theme = localStorage.getItem('color-theme')
+    var root = document.getElementsByTagName('html')[0];
+    if (theme) {
+        root.setAttribute('class', theme);
+        console.log(theme)
+    }
+})
+
 const themeToggleBtn = document.getElementById('theme-toggle');
 
 let event = new Event('dark-mode');
@@ -40,5 +49,4 @@ themeToggleBtn.addEventListener('click', function () {
     }
 
     document.dispatchEvent(event);
-
 });

@@ -1,5 +1,5 @@
 <div>
-    <div class="p-4 mx-4 my-6 bg-white rounded-lg shadow md:p-6 xl:p-8 dark:bg-gray-800">
+    <div class="p-4 mx-4 my-6 bg-white rounded-lg shadow md:p-6 xl:p-8 dark:bg-gray-800 dark:text-white">
         {{-- USER STATUS --}}
         <div class="flex flex-col-reverse items-center justify-between lg:flex-row">
             <div class="flex-none">
@@ -25,7 +25,7 @@
                                         {{ $transaction->user->email }}
                                     </div>
                                 </div>
-                                <div class="flex gap-2 text-xs text-gray-700">
+                                <div class="flex gap-2 text-xs text-gray-700 dark:text-gray-100">
                                     <div class="flex items-baseline gap-1">
                                         <span class="w-2 bg-green-300 rounded-full aspect-square"></span>
                                         {{ StringHelper::currency($transaction->user->transactions()->status(\App\Enums\TransactionStatusType::Completed)->count()) }}
@@ -76,6 +76,7 @@
                     'py-1',
                     'text-xs',
                     'font-bold',
+                    'dark:text-black',
                 ])>
                     {{ __(Str::headline($transaction->status)) }}
                 </span>
@@ -254,16 +255,16 @@
                 @else
                     @if ($transaction->status != \App\Enums\TransactionStatusType::Canceled)
                         <div class="mb-4">
-                            <div class="mb-1 text-gray-700">
+                            <div class="mb-1 text-gray-700 dark:text-gray-100">
                                 {{ __('Payment has been confirmed.') }}
                             </div>
-                            <div class="mb-1 text-gray-700">
+                            <div class="mb-1 text-gray-700 dark:text-gray-100">
                                 <span class="font-bold">
                                     {{ __('Payment Vendor') }}:
                                 </span>
                                 <span>{{ $transaction->payment->payment_vendor->name }}</span>
                             </div>
-                            <div class="mb-1 text-gray-700">
+                            <div class="mb-1 text-gray-700 dark:text-gray-100">
                                 <span class="font-bold">
                                     {{ __('Account Number') }}:
                                 </span>
@@ -320,7 +321,7 @@
     @if (
         $transaction->status != \App\Enums\TransactionStatusType::Canceled &&
             $transaction?->payment->status == \App\Enums\PaymentStatusType::WaitingForConfirmation)
-        <div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full"
+        <div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto dark:text-white top-4 md:inset-0 h-modal sm:h-full"
             id="proof-of-payment-modal">
             <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
@@ -376,7 +377,6 @@
                             {{ __('Close') }}
                         </button>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>

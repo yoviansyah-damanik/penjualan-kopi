@@ -3,7 +3,7 @@
         <div class="mb-1 font-bold">
             {{ __('Delivery') }}
         </div>
-        <div class="mb-1 text-gray-700">
+        <div class="mb-1 text-gray-700 dark:text-gray-100">
             {{ __('Delivery has been made. Customers can access delivery history via the link below.') }}
         </div>
         <a class="italic font-light hover:underline" href="https://tiki.id/id/track"

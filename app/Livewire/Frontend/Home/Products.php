@@ -7,10 +7,12 @@ use Livewire\Component;
 
 class Products extends Component
 {
-    const LIMIT = 6;
+    const LIMIT = 8;
     public function render()
     {
-        $products = Product::inRandomOrder()
+        $products = Product::with('category')
+            ->inRandomOrder()
+            ->ready()
             ->limit(self::LIMIT)
             ->get();
 

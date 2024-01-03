@@ -45,6 +45,7 @@ class Index extends Component
 
             DB::commit();
             $this->alert('success', __('The :feature was successfully confirmed.', ['feature' => __('Payment')]));
+            $this->redirect(route('dashboard.transaction.show', base64_encode($this->transaction->id)), true);
         } catch (Exception $e) {
             DB::rollBack();
             $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
@@ -67,7 +68,8 @@ class Index extends Component
             );
 
             DB::commit();
-            $this->alert('success', __('The :feature was successfully updated.', ['feature' => __('Payment')]));
+            $this->alert('success', __('The :feature was successfully canceled.', ['feature' => __('Payment')]));
+            $this->redirect(route('dashboard.transaction.show', base64_encode($this->transaction->id)));
         } catch (Exception $e) {
             DB::rollBack();
             $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);

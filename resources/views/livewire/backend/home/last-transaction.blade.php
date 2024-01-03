@@ -70,6 +70,10 @@
                                     class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                     {{ __('Status') }}
                                 </th>
+                                <th scope="col"
+                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                    {{ __('Action') }}
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-gray-800">
@@ -197,6 +201,7 @@
                                             'py-1',
                                             'text-xs',
                                             'font-bold',
+                                            'dark:text-black',
                                         ])>
                                             {{ __(Str::headline($transaction->status)) }}
                                         </span>
@@ -255,7 +260,7 @@
         </div>
         <div class="flex-shrink-0">
             <a href="{{ route('dashboard.report.transaction') }}"
-                class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
+                class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm dark:text-white hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
                 {{ __('Transactions Report') }}
                 <svg class="w-4 h-4 ml-1 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">

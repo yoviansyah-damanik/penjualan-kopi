@@ -45,9 +45,13 @@ class SalesStatistic extends Component
         if ($this->type == 'annual') {
             $sales_this_month = $sales_transaction['results']->sum(fn ($q) => $q['results']->sum('total.sold'));
             $total_sales = $sales_transaction['results']->sum(fn ($q) => $q['results']->sum('total.sales_income'));
+            $cost_this_month = $sales_transaction['results']->sum(fn ($q) => $q['results']->sum('total.cost'));
+            $total_net = $sales_transaction['results']->sum(fn ($q) => $q['results']->sum('total.net'));
         } else {
             $sales_this_month = $sales_transaction['results']->sum(fn ($q) => $q['results'][0]['total']['sold']);
             $total_sales = $sales_transaction['results']->sum(fn ($q) => $q['results'][0]['total']['sales_income']);
+            $cost_this_month = $sales_transaction['results']->sum(fn ($q) => $q['results'][0]['total']['cost']);
+            $total_net = $sales_transaction['results']->sum(fn ($q) => $q['results'][0]['total']['net']);
         }
 
         return view('livewire.backend.home.sales-statistic', compact(
@@ -57,7 +61,9 @@ class SalesStatistic extends Component
             'canceled_transactions',
             'total_transactions',
             'sales_this_month',
-            'total_sales'
+            'total_sales',
+            'cost_this_month',
+            'total_net',
         ));
     }
 }

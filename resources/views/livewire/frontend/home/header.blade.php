@@ -16,7 +16,8 @@
                         <p class="mb-8 text-white text wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.8s">
                             {{ __('Now you can order coffee according to your wishes without any hassle') }}
                         </p>
-                        <a href="#" class="main-btn bg-gradient-to-br from-pink-950 to-red-800 wow fadeInUp"
+                        <a href="{{ Auth::check() ? route('product') : route('login') }}"
+                            class="main-btn bg-gradient-to-br from-pink-950 to-red-800 wow fadeInUp"
                             data-wow-duration="1.3s" data-wow-delay="1.1s">
                             {{ __('Get Started') }}
                         </a>

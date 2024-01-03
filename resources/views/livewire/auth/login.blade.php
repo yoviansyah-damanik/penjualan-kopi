@@ -96,7 +96,7 @@
                             {{ config('app.name') }}
                         </a>
                         <button navbar-trigger
-                            class="px-3 py-1 ml-2 text-lg leading-none transition-all ease-in-out bg-transparent border border-transparent border-solid rounded-lg shadow-none cursor-pointer lg:hidden"
+                            class="hidden px-3 py-1 ml-2 text-lg leading-none transition-all ease-in-out bg-transparent border border-transparent border-solid rounded-lg shadow-none cursor-pointer lg:block lg:hidden"
                             type="button" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="inline-block w-6 h-6 mt-2 align-middle bg-center bg-no-repeat bg-cover bg-none">
                                 <span bar1
