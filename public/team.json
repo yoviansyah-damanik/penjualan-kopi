@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Nama Pemilik",
+        "gender": "L",
+        "position": "Pemilik",
+        "platform": {
+            "facebook": "#",
+            "twitter": "#",
+            "instagram": "#"
+        }
+    },
+    {
+        "name": "Nama Petugas",
+        "gender": "P",
+        "position": "Sales",
+        "platform": {
+            "facebook": "#",
+            "twitter": "#",
+            "instagram": "#"
+        }
+    },
+    {
+        "name": "Nama Petugas",
+        "gender": "L",
+        "position": "Sales",
+        "platform": {
+            "facebook": "#",
+            "twitter": "#",
+            "instagram": "#"
+        }
+    }
+]

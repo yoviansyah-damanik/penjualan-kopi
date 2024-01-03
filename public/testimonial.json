@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Butet Margaret",
+        "gender": "P",
+        "position": "Ibu Rumah Tangga",
+        "review": "Kopi yang sangat nikmat. Apalagi diseduh pada saat cuaca dingin. Beeehhh. Mantap."
+    },
+    {
+        "name": "Ucok Sitogos",
+        "gender": "L",
+        "position": "Supir",
+        "review": "Mata langsung ngejreng seketika saat menyeduh kopi yang luar biasa nikmatnya."
+    },
+    {
+        "name": "Lamhot Huta Barat",
+        "gender": "L",
+        "position": "Penjual Kopi",
+        "review": "Laris manissss. Kopinya disukai masyarakat."
+    }
+]
