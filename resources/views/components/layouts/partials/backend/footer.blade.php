@@ -46,6 +46,6 @@
     </div>
 </footer>
 <p class="my-10 text-sm text-center text-gray-500">
-    &copy;{{ date('Y') }} <a href="/" class="hover:underline" target="_blank">Flowbite.com</a>. All rights
-    reserved.
+    Copyright © {{ date('Y') }}
+    {{ config('app.name') }}.
 </p>
