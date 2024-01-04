@@ -98,12 +98,12 @@
             </div>
         </div>
         <div class="py-8 border-t border-gray-200 footer-copyright">
-            <p class="text-white">
-                Template by <a class="duration-300 hover:text-theme-color-2" href="https://tailwindtemplates.co"
-                    rel="nofollow" target="_blank">TailwindTemplates</a> and
-                <a class="duration-300 hover:text-theme-color-2" href="https://uideck.com" rel="nofollow"
-                    target="_blank">UIdeck</a>
-            </p>
+            <div class="w-8/12 max-w-full px-3 mx-auto mt-1 text-center flex-0">
+                <p class="mb-0 text-sm text-gray-100">
+                    Copyright © {{ date('Y') }}
+                    {{ config('app.name') }}.
+                </p>
+            </div>
         </div>
     </div>
     <div id="particles-2" class="particles"></div>
