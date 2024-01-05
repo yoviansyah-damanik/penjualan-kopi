@@ -46,4 +46,22 @@ class Show extends Component
             $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
         }
     }
+
+    public function cancel()
+    {
+        if ($this->transaction->status != TransactionStatusType::WaitingForPayment)
+            return $this->alert('error', __('Action cannot be performed'));
+
+        try {
+            $this->transaction->update([
+                'status' => TransactionStatusType::Canceled
+            ]);
+
+            $this->alert('success', __('The :feature was successfully updated.', ['feature' => __('Order')]));
+        } catch (Exception $e) {
+            $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
+        } catch (Throwable $e) {
+            $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
+        }
+    }
 }

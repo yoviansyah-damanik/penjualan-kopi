@@ -262,6 +262,14 @@
                             {{ __(Str::headline($transaction->status)) }}
                         </span>
                     </div>
+                    @if ($transaction->status == \App\Enums\TransactionStatusType::WaitingForPayment)
+                        <button
+                            wire:confirm="{{ __('Are you sure you want to cancel the :feature?', ['feature' => __('order')]) }}"
+                            wire:click="cancel"
+                            class="inline-block w-full px-4 py-2 text-white duration-150 bg-red-700 rounded-lg hover:bg-red-950">
+                            {{ __('Cancel the order') }}
+                        </button>
+                    @endif
                     <div class="p-4 border rounded-lg">
                         <div class="space-y-3">
                             <div>

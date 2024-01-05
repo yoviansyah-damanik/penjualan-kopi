@@ -19,7 +19,7 @@ return new class extends Migration
             $table->char('product_id', 16)
                 ->references('id')
                 ->on('products');
-            $table->unsignedBigInteger('qty')
+            $table->integer('qty')
                 ->default(1);
             $table->timestamps();
         });

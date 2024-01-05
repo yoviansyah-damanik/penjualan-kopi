@@ -84,16 +84,9 @@ class Product extends Model
         );
     }
 
-    protected function additionalImagesPath(): Attribute
+    public function scopeReady($query): void
     {
-        return new Attribute(
-            get: fn () => Str::of($this->additional_images)->explode(';')->collect()
-        );
-    }
-
-    public function scopeReady($query)
-    {
-        return $query->where('is_ready', true);
+        $query->where('is_ready', true);
     }
 
     public function category(): BelongsTo

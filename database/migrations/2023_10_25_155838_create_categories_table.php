@@ -15,7 +15,7 @@ return new class extends Migration
             $table->char('id', 6)->primary();
             $table->text('slug');
             $table->string('name');
-            $table->text('description');
+            $table->string('description');
             $table->timestamps();
         });
     }

@@ -122,7 +122,7 @@
                 <button
                     wire:confirm="{{ __('Are you sure you want to cancel the :feature?', ['feature' => __('order')]) }}"
                     wire:click="cancel"
-                    class="me-1 inline-block text-xs px-2 py-[.125rem] bg-red-700 hover:bg-red-950 duration-150 text-white rounded-sm">
+                    class="inline-block px-4 py-[.125rem] bg-red-700 hover:bg-red-950 duration-150 text-white rounded-lg">
                     {{ __('Cancel the order') }}
                 </button>
             </div>

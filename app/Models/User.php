@@ -71,9 +71,9 @@ class User extends Authenticatable
         );
     }
 
-    public function scopeReady($query)
+    public function scopeReady($query): void
     {
-        return $query->whereHas('product', fn ($q) => $q->where('is_ready', true));
+        $query->whereHas('product', fn ($q) => $q->where('is_ready', true));
     }
 
     public function carts(): HasMany

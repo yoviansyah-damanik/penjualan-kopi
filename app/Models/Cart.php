@@ -27,15 +27,15 @@ class Cart extends Model
         );
     }
 
-    public function scopeProductReady($query)
+    public function scopeProductReady($query): void
     {
-        return $query->whereHas('product', fn ($q) => $q->ready());
+        $query->whereHas('product', fn ($q) => $q->ready());
     }
 
 
-    public function scopeLogged($query)
+    public function scopeLogged($query): void
     {
-        return $query->where('user_id', Auth::id());
+        $query->where('user_id', Auth::id());
     }
 
     public function product(): BelongsTo

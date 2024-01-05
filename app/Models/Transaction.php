@@ -46,14 +46,14 @@ class Transaction extends Model
         );
     }
 
-    protected function scopeStatus($query, $status)
+    protected function scopeStatus($query, $status): void
     {
-        return $query->where('status', $status);
+        $query->where('status', $status);
     }
 
-    protected function scopeLogged($query)
+    protected function scopeLogged($query): void
     {
-        return $query->where('user_id', Auth::id());
+        $query->where('user_id', Auth::id());
     }
 
     public function details(): HasMany
