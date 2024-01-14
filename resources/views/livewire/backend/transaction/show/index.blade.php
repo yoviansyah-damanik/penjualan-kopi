@@ -207,7 +207,7 @@
                                     </td>
                                     <td
                                         class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                        {{ StringHelper::currency($item->price, true) }}
+                                        {{ StringHelper::currency($item->final_price, true) }}
                                     </td>
                                     <td
                                         class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
@@ -310,7 +310,7 @@
                 @if (in_array($transaction->status, [
                         \App\Enums\TransactionStatusType::WaitingForDelivery,
                         \App\Enums\TransactionStatusType::Completed,
-                    ]))
+                    ]) && $transaction->type != \App\Enums\TransactionType::DirectPurchase)
                     <livewire:backend.transaction.show.delivery :$transaction />
                 @endif
             </div>

@@ -56,4 +56,8 @@ Route::as('dashboard.')
             ->name('report.sales');
         Route::get('/report/transaction', App\Livewire\Backend\Report\Transaction\Index::class)
             ->name('report.transaction');
+
+        // Direct Purchase
+        Route::get('/direct-purchase', App\Livewire\Backend\DirectPurchase\Index::class)
+            ->name('direct-purchase');
     });

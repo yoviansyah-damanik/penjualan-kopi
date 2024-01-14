@@ -19,9 +19,10 @@ return new class extends Migration
             $table->char('payment_vendor_id', 6)
                 ->references('id')
                 ->on('payment_vendors');
-            $table->text('image');
+            $table->text('image')->nullable();
             $table->enum('status', PaymentStatusType::getValues())
                 ->default(PaymentStatusType::WaitingForConfirmation);
+
             $table->timestamps();
         });
     }

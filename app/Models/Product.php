@@ -84,6 +84,12 @@ class Product extends Model
         );
     }
 
+    protected function finalPrice(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->price - $this->discount
+        );
+    }
     public function scopeReady($query): void
     {
         $query->where('is_ready', true);

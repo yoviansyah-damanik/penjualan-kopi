@@ -18,7 +18,7 @@
                         class="block overflow-hidden font-semibold text-ellipsis whitespace-nowrap navigate-link">
                         {{ $cart->product->name }}
                         <div class="text-sm font-light">
-                            {{ StringHelper::currency($cart->product->price, true) }}
+                            {{ StringHelper::currency($cart->product->final_price, true) }}
                         </div>
                     </a>
                     <div @class([

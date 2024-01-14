@@ -10,7 +10,7 @@ class CalcHelper
 
         if ($carts)
             $result = $carts->whereHas('product', fn ($q) => $q->ready())
-                ->sum(fn ($q) => $q->amount * $q->product->price);
+                ->sum(fn ($q) => $q->amount * $q->product->final_price);
 
         return $result;
     }

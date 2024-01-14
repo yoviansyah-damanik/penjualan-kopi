@@ -56,7 +56,7 @@
                     <div class="col-span-4 lg:col-span-5">
                         <label class="block mb-1" for="evidence">{{ __('Evidence of delivery') }}</label>
                         <input type="file" placeholder="{{ __('Evidence of delivery') }}"
-                            wire:model.live.debounce.1s='evidence' required
+                            wire:model.live.debounce.500ms='evidence' required
                             class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-orange-950 focus:outline-none" />
                     </div>
                     <button type="submit" wire:loading.attr='disabled' wire:target="evidence"
@@ -69,7 +69,6 @@
                         {{ $message }}
                     </div>
                 @enderror
-
 
             </form>
         </div>

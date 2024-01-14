@@ -25,12 +25,13 @@ class Payment extends Component
 
     public function mount(Transaction $transaction)
     {
-        $this->payment_vendors = PaymentVendor::get();
         $this->transaction = $transaction;
     }
 
     public function render()
     {
+        $this->payment_vendors = PaymentVendor::show()
+            ->get();
         return view('livewire.frontend.profile.history.payment');
     }
 
@@ -47,7 +48,7 @@ class Payment extends Component
     public function validationAttributes()
     {
         return [
-            'evidence' => __('Evidence of delivery'),
+            'evidence' => __('Evidence of Payment'),
             'payment_vendor' => __('Payment vendor'),
         ];
     }

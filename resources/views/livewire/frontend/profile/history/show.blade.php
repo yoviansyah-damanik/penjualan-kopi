@@ -159,10 +159,10 @@
                                             </div>
                                         </a>
                                         <div class="px-3 mt-3 text-sm text-end">
-                                            @ {{ StringHelper::currency($detail->price, true) }}
+                                            @ {{ StringHelper::currency($detail->final_price, true) }}
                                             <div class="italic">
                                                 {{ $detail->qty }} x
-                                                {{ StringHelper::currency($detail->qty * $detail->price, true) }}
+                                                {{ StringHelper::currency($detail->total, true) }}
                                             </div>
                                         </div>
                                     </div>

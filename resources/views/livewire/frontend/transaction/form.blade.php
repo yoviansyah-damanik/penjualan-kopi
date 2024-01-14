@@ -93,7 +93,7 @@
                         {{ __('Subtotal') }}
                     </td>
                     <td class="p-2 border-b text-end whitespace-nowrap">
-                        {{ StringHelper::currency($carts->sum(fn($q) => $q->qty * $q->product->price)) }}
+                        {{ StringHelper::currency($carts->sum(fn($q) => $q->qty * $q->product->final_price)) }}
                     </td>
                 </tr>
                 <tr>
@@ -109,7 +109,7 @@
                         {{ __('Total Payment') }}
                     </td>
                     <td class="p-2 border-b text-end whitespace-nowrap">
-                        {{ StringHelper::currency($carts->sum(fn($q) => $q->qty * $q->product->price) + $shipping_cost) }}
+                        {{ StringHelper::currency($carts->sum(fn($q) => $q->qty * $q->product->final_price) + $shipping_cost) }}
                     </td>
                 </tr>
             </tbody>

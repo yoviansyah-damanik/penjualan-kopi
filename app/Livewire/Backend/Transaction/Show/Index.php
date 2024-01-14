@@ -2,14 +2,15 @@
 
 namespace App\Livewire\Backend\Transaction\Show;
 
-use App\Enums\PaymentStatusType;
-use App\Enums\TransactionStatusType;
 use Exception;
 use Throwable;
+use App\Models\Payment;
 use Livewire\Component;
 use App\Models\Transaction;
 use Livewire\Attributes\Layout;
+use App\Enums\PaymentStatusType;
 use Illuminate\Support\Facades\DB;
+use App\Enums\TransactionStatusType;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 #[Layout('components.layouts.backend')]
@@ -22,7 +23,8 @@ class Index extends Component
 
     public function mount($id)
     {
-        $this->transaction = Transaction::findOrFail(base64_decode($id));
+        $this->transaction = Transaction::findOrFail(base64_decode($id))
+            ->load('payment');
     }
 
     public function render()
@@ -39,7 +41,7 @@ class Index extends Component
                 'status' => TransactionStatusType::WaitingForDelivery
             ]);
 
-            $this->transaction->payment->update(
+            Payment::where('transaction_id', $this->transaction->id)->update(
                 ['status' => PaymentStatusType::PaidOff]
             );
 

@@ -14,8 +14,20 @@
             {{ $product->is_ready ? __('Available') : __('Unavailable') }}
         </span>
     </div>
-    <div class="mb-5 text-2xl font-extrabold text-center">
-        {{ StringHelper::currency($product->price, true) }}
+    <div class="flex items-end justify-between mb-5">
+        @if ($product->discount)
+            <span
+                class="relative text-sm before:block before:w-full before:border-t-[3px] before:border-red-300 before:h-3 before:absolute before:bottom-0 before:left-0 before:rotate-[-7deg]">
+                {{ StringHelper::currency($product->price, true) }}
+            </span>
+            <div class="text-xl font-bold text-orange-900">
+                {{ StringHelper::currency($product->final_price, true) }}
+            </div>
+        @else
+            <div class="text-xl font-bold">
+                {{ StringHelper::currency($product->price, true) }}
+            </div>
+        @endif
     </div>
     <div class="flex flex-wrap justify-center gap-1 py-3 mt-3 bg-white">
         <button wire:click='decrement' wire:loading.attr='disabled' wire:target='increment,decrement,delete'

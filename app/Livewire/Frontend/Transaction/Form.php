@@ -20,10 +20,10 @@ use Illuminate\Validation\Rule as ValidationRule;
 class Form extends Component
 {
     use LivewireAlert;
-    #[Rule('required|string|min:8|max:200')]
+    #[Rule('required|string|min:3|max:200')]
     public $orderer_name;
 
-    #[Rule('required|string|min:8')]
+    #[Rule('required|string|min:3')]
     public $address;
 
     #[Rule('nullable|string|max:200')]

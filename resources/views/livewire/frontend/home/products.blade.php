@@ -14,11 +14,16 @@
             </div>
         </div>
         <div class="justify-center row">
-            @foreach ($products as $product)
+            @forelse ($products as $product)
                 <div class="w-1/2 lg:w-1/4">
-                    <div class="relative px-2 py-4 mx-2 mb-4 overflow-hidden text-center duration-300 rounded-lg group lg:mt-8 lg:mx-3 lg:px-3 lg:py-6 wow fadeIn"
+                    <div class="relative px-2 py-4 mx-2 mb-4 overflow-hidden duration-300 rounded-lg group lg:mt-6 lg:mx-3 lg:px-3 lg:py-6 wow fadeIn"
                         data-wow-duration="1s" data-wow-delay="0.2s">
-                        <img class="w-64 mx-auto aspect-square" src="{{ $product->main_image_path }}"
+                        <img @class([
+                            'w-64',
+                            'mx-auto',
+                            'aspect-square',
+                            'grayscale' => !$product->is_ready,
+                        ]) src="{{ $product->main_image_path }}"
                             alt="{{ $product->name }} Image">
                         <div class="mt-4">
                             <h4
@@ -28,9 +33,29 @@
                             <div class="mb-4 text-sm font-light">
                                 {{ $product->category_name }}
                             </div>
-                            <p class="text-sm line-clamp-3 lg:text-base">
+                            <p class="mb-4 text-sm line-clamp-3 lg:text-base">
                                 {{ $product->excerpt }}
                             </p>
+                            <div @class([
+                                'flex',
+                                'items-end',
+                                'justify-between',
+                                '!justify-end' => !$product->discount,
+                            ])>
+                                @if ($product->discount)
+                                    <span
+                                        class="relative text-sm before:block before:w-full before:border-t-[3px] before:border-red-300 before:h-3 before:absolute before:bottom-0 before:left-0 before:rotate-[-7deg]">
+                                        {{ StringHelper::currency($product->price, true) }}
+                                    </span>
+                                    <div class="text-xl font-bold text-orange-900">
+                                        {{ StringHelper::currency($product->final_price, true) }}
+                                    </div>
+                                @else
+                                    <div class="text-xl font-bold text-orange-900">
+                                        {{ StringHelper::currency($product->price, true) }}
+                                    </div>
+                                @endif
+                            </div>
                             <div
                                 class="absolute inset-0 flex items-center justify-center gap-3 transition duration-300 opacity-0 group-hover:opacity-100 group-hover:z-10 -z-10 bg-orange-950/10">
                                 @guest
@@ -62,7 +87,11 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="text-center">
+                    {{ __('No data found.') }}
+                </div>
+            @endforelse
         </div>
         <div class="mt-16 text-center lg:mt-20">
             <a href="{{ route('product') }}" wire:navigate class="main-btn gradient-btn">{{ __('Show more') }}</a>

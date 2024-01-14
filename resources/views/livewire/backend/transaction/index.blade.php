@@ -48,6 +48,10 @@
                             </th>
                             <th scope="col"
                                 class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                {{ __('Type') }}
+                            </th>
+                            <th scope="col"
+                                class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                 {{ __('Actions') }}
                             </th>
                         </tr>
@@ -180,6 +184,27 @@
                                         {{ __(Str::headline($transaction->status)) }}
                                     </span>
                                 </td>
+                                <td class="p-4 text-base text-gray-900 whitespace-nowrap dark:text-white">
+                                    <span @class([
+                                        'border',
+                                        'bg-yellow-100' =>
+                                            $transaction->type == \App\Enums\TransactionType::Ecommerce,
+                                        'bg-cyan-100' =>
+                                            $transaction->type == \App\Enums\TransactionType::DirectPurchase,
+                                        'border-yellow-300' =>
+                                            $transaction->type == \App\Enums\TransactionType::Ecommerce,
+                                        'border-cyan-300' =>
+                                            $transaction->type == \App\Enums\TransactionType::DirectPurchase,
+                                        'rounded-lg',
+                                        'px-3',
+                                        'py-1',
+                                        'text-xs',
+                                        'font-bold',
+                                        'dark:text-black',
+                                    ])>
+                                        {{ __(Str::headline($transaction->type)) }}
+                                    </span>
+                                </td>
                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                     <a href="{{ route('dashboard.transaction.show', base64_encode($transaction->id)) }}"
                                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
@@ -213,14 +238,3 @@
         </div>
     </div>
 </div>
-
-@push('scripts')
-    <script type="text/javascript">
-        document.addEventListener('closeDrawer', (el) => {
-            // var driwerId = document.getElementById(el.detail)
-            // var drawer_2 = getInstance('Drawer', drawerId);
-
-            // driwerId.hide();
-        })
-    </script>
-@endpush

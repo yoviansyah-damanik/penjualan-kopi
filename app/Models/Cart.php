@@ -16,7 +16,7 @@ class Cart extends Model
     protected function totalPrice(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->amount * $this->product->price
+            get: fn () => $this->amount * $this->product->final_price
         );
     }
 

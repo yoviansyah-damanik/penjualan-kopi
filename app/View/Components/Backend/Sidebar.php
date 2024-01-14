@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
-use App\Enums\TransactionStatusType;
 
 class Sidebar extends Component
 {
@@ -32,6 +31,17 @@ class Sidebar extends Component
                         'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"><path fill="currentColor" d="M14.06 9.94L12 9l2.06-.94L15 6l.94 2.06L18 9l-2.06.94L15 12zM4 14l.94-2.06L7 11l-2.06-.94L4 8l-.94 2.06L1 11l2.06.94zm4.5-5l1.09-2.41L12 5.5L9.59 4.41L8.5 2L7.41 4.41L5 5.5l2.41 1.09zm-4 11.5l6-6.01l4 4L23 8.93l-1.41-1.41l-7.09 7.97l-4-4L3 19z"/></svg>',
                         'uri' => route('dashboard.home'),
                         'is_active' => request()->routeIs('dashboard.home')
+                    ]
+                ],
+            ],
+            [
+                'title' => '',
+                'menus' => [
+                    [
+                        'title' => 'Direct Purchase',
+                        'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"><path fill="currentColor" d="M2 12q0 1.7.85 3.113t2.275 2.162q.35.2.513.575t.012.75q-.15.4-.525.575T4.4 19.15q-1.95-1-3.175-2.887T0 12q0-2.35 1.188-4.225T4.3 4.9q.35-.2.738-.038t.562.563q.175.35.025.725t-.5.575Q3.7 7.475 2.85 8.888T2 12Zm12 8q-3.325 0-5.663-2.337T6 12q0-3.325 2.337-5.663T14 4q1.4 0 2.65.45t2.275 1.25q.325.25.325.65t-.3.7q-.275.275-.688.3t-.762-.225q-.75-.55-1.638-.837T14 6q-2.5 0-4.25 1.75T8 12q0 2.5 1.75 4.25T14 18q.975 0 1.863-.288t1.637-.837q.35-.25.763-.225t.687.3q.3.3.3.7t-.325.65q-1.025.8-2.275 1.25T14 20Zm6.2-7H14q-.425 0-.713-.288T13 12q0-.425.288-.713T14 11h6.2l-.9-.9q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l2.6 2.6q.3.3.3.7t-.3.7l-2.6 2.6q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l.9-.9Z"/></svg>',
+                        'uri' => route('dashboard.direct-purchase'),
+                        'is_active' => request()->routeIs('dashboard.direct-purchase')
                     ]
                 ],
             ],

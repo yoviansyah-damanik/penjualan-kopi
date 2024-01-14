@@ -15,7 +15,14 @@ class DetailTransaction extends Model
     protected function total(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->qty * ($this->price - $this->discount)
+            get: fn () => $this->qty * $this->final_price
+        );
+    }
+
+    protected function finalPrice(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->price - $this->discount
         );
     }
 

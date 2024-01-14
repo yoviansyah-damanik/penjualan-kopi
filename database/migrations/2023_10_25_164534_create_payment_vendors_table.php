@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string('account_number');
             $table->string('description');
             $table->text('image')->nullable();
+            $table->enum('type', ['show', 'hide'])
+                ->default('show');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

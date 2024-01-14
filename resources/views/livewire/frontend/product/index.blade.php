@@ -54,7 +54,7 @@
         <div class="justify-center row">
             @forelse ($products as $product)
                 <div class="w-1/2 lg:w-1/4">
-                    <div class="relative px-2 py-4 mx-2 mb-4 overflow-hidden text-center duration-300 rounded-lg group lg:mt-6 lg:mx-3 lg:px-3 lg:py-6 wow fadeIn"
+                    <div class="relative px-2 py-4 mx-2 mb-4 overflow-hidden duration-300 rounded-lg group lg:mt-6 lg:mx-3 lg:px-3 lg:py-6 wow fadeIn"
                         data-wow-duration="1s" data-wow-delay="0.2s">
                         <img @class([
                             'w-64',
@@ -71,9 +71,29 @@
                             <div class="mb-4 text-sm font-light">
                                 {{ $product->category_name }}
                             </div>
-                            <p class="text-sm line-clamp-3 lg:text-base">
+                            <p class="mb-4 text-sm line-clamp-3 lg:text-base">
                                 {{ $product->excerpt }}
                             </p>
+                            <div @class([
+                                'flex',
+                                'items-end',
+                                'justify-between',
+                                '!justify-end' => !$product->discount,
+                            ])>
+                                @if ($product->discount)
+                                    <span
+                                        class="relative text-sm before:block before:w-full before:border-t-[3px] before:border-red-300 before:h-3 before:absolute before:bottom-0 before:left-0 before:rotate-[-7deg]">
+                                        {{ StringHelper::currency($product->price, true) }}
+                                    </span>
+                                    <div class="text-xl font-bold text-orange-900">
+                                        {{ StringHelper::currency($product->final_price, true) }}
+                                    </div>
+                                @else
+                                    <div class="text-xl font-bold text-orange-900">
+                                        {{ StringHelper::currency($product->price, true) }}
+                                    </div>
+                                @endif
+                            </div>
                             <div
                                 class="absolute inset-0 flex items-center justify-center gap-3 transition duration-300 opacity-0 group-hover:opacity-100 group-hover:z-10 -z-10 bg-orange-950/10">
                                 @guest
@@ -105,69 +125,11 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div @class([
-                    'flex-grow-0',
-                    'flex-shrink-0',
-                    'mb-3',
-                    'overflow-hidden',
-                    'basis-1/2',
-                    'lg:basis-1/4',
-                    'wow',
-                    'fadeIn',
-                ]) data-wow-delay="{{ 0.2 * (($loop->iteration - 1) % 4) }}s">
-                    <div class="mx-1 overflow-hidden border rounded-xl">
-                        <img class="w-full" src="{{ $product->main_image_path ?? Vite::image('product-default.png') }}"
-                            alt="{{ $product->name }} Image">
-                        <div class="p-3 lg:p-4">
-                            <a wire:navigate href="{{ route('product.show', $product->slug) }}"
-                                class="block overflow-hidden font-semibold text-ellipsis whitespace-nowrap">
-                                {{ $product->name }}
-                            </a>
-                            <div
-                                class="overflow-hidden italic font-light text-gray-500 text-ellipsis whitespace-nowrap">
-                                {{ $product->category_name }}
-                            </div>
-
-                            <div class="text-lg lg:text-2xl text-end text-[#991b1b] font-bold mt-3">
-                                {{ StringHelper::currency($product->price, true) }}
-                            </div>
-
-                            @guest
-                                <a href="{{ route('login') }}"
-                                    class="mt-4 bg-[#991b1b] text-white w-full py-2 px-5 flex items-center justify-center gap-2 hover:bg-[#3C2A21] transition duration-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                                        viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                        <path fill="currentColor"
-                                            d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                                    </svg>
-                                    <span class="hidden lg:!inline-block">
-                                        {{ __('Add to cart') }}
-                                    </span>
-                                </a>
-                            @else
-                                <button wire:click="$dispatch('add_to_cart',{product:'{{ $product->slug }}'})"
-                                    wire:loading.attr='disabled' wire:target='add_to_cart'
-                                    class="mt-4 bg-[#991b1b] rounded-lg text-white w-full py-2 px-5 flex items-center justify-center gap-2 hover:bg-[#3C2A21] transition duration-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                                        viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                        <path fill="currentColor"
-                                            d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                                    </svg>
-                                    <span class="hidden lg:!inline-block">
-                                        {{ __('Add to cart') }}
-                                    </span>
-                                </button>
-                            @endguest
-                        </div>
-                    </div>
-                </div> --}}
-
             @empty
                 <div class="text-center">
                     {{ __('No data found.') }}
                 </div>
             @endforelse
-
         </div>
         @if ($products->hasPages())
             <div class="block mt-6">
