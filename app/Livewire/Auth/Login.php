@@ -69,12 +69,8 @@ class Login extends Component
 
                     session()->regenerate();
 
-                    return $this->redirect(session()->pull('url.intended', '/'));
-
-                    // if (Auth::user()->role_name == 'User')
-                    // return $this->redirect(route('home'), false);
-
-                    // return to_route('dashboard.home');
+                    return to_route('home');
+                    // return $this->redirect(session()->pull('url.intended', '/'));
                 }
 
                 $this->button_enabled = true;
