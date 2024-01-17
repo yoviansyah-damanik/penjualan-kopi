@@ -11,7 +11,7 @@
                             <p class="mb-0 leading-5">{{ __('Enter your username/email and password to sign in') }}</p>
                         </div>
                         <div class="flex-auto p-6">
-                            <form wire:submit.prevent='do_login'>
+                            <form wire:submit='do_login'>
                                 <div class="mb-4">
                                     <input type="text" placeholder="{{ __('Username') }}" wire:model.defer='username'
                                         required
