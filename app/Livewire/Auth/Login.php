@@ -42,7 +42,7 @@ class Login extends Component
             'remember_me' => __('Remember Me')
         ];
     }
-    public function login()
+    public function do_login()
     {
         $this->validate();
         try {
