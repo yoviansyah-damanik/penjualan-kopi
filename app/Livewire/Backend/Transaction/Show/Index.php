@@ -65,7 +65,7 @@ class Index extends Component
                 'status' => TransactionStatusType::WaitingForConfirmation
             ]);
 
-            $this->transaction->payment->update(
+            Payment::where('transaction_id', $this->transaction->id)->update(
                 ['status' => PaymentStatusType::WaitingForConfirmation]
             );
 

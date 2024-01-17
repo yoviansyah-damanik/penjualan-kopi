@@ -68,12 +68,20 @@
 
         <livewire:backend.home.notify :$type :$month :$year :$start_date :$end_date />
 
-        <div class="grid gap-4 xl:grid-cols-3">
-            <livewire:backend.home.chart :$type :$month :$year />
-            <livewire:backend.home.statistic :$type :$month :$year :$start_date :$end_date />
+        <div class="grid grid-cols-3 grid-rows-none gap-4">
+            <div class="col-span-3 xl:col-span-1">
+                <livewire:backend.home.statistic :$type :$month :$year :$start_date :$end_date />
+            </div>
+            <div class="col-span-3 xl:col-span-2">
+                <livewire:backend.home.sales-chart :$type :$month :$year />
+                <livewire:backend.home.income-chart :$type :$month :$year />
+            </div>
         </div>
 
         <livewire:backend.home.sales-statistic :$type :$month :$year :$start_date :$end_date />
         <livewire:backend.home.last-transaction />
     </div>
 </div>
+
+@push('scripts')
+@endpush

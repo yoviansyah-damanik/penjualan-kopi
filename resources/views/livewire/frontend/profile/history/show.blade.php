@@ -262,7 +262,10 @@
                             {{ __(Str::headline($transaction->status)) }}
                         </span>
                     </div>
-                    @if ($transaction->status == \App\Enums\TransactionStatusType::WaitingForPayment)
+                    @if (in_array($transaction->status, [
+                            \App\Enums\TransactionStatusType::WaitingForPayment,
+                            \App\Enums\TransactionStatusType::WaitingForConfirmation,
+                        ]))
                         <button
                             wire:confirm="{{ __('Are you sure you want to cancel the :feature?', ['feature' => __('order')]) }}"
                             wire:click="cancel"

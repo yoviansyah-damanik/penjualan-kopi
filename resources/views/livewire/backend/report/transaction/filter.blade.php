@@ -1,3 +1,3 @@
 <div>
-    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
+    {{-- Care about people's approval and you will be their prisoner. --}}
 </div>

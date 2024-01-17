@@ -19,7 +19,7 @@ class Filter extends Component
 
     public function mount()
     {
-        $this->type = 'annual';
+        $this->type = 'monthly';
         $this->month = Carbon::now()->month;
         $this->year = Carbon::now()->year;
     }

@@ -49,7 +49,10 @@ class Show extends Component
 
     public function cancel()
     {
-        if ($this->transaction->status != TransactionStatusType::WaitingForPayment)
+        if (!in_array($this->transaction->status, [
+            \App\Enums\TransactionStatusType::WaitingForPayment,
+            \App\Enums\TransactionStatusType::WaitingForConfirmation,
+        ]))
             return $this->alert('error', __('Action cannot be performed'));
 
         try {

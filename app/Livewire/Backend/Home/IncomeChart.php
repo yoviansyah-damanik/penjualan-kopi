@@ -7,7 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\Reactive;
 use App\Repository\ProductSalesRepository;
 
-class Chart extends Component
+class IncomeChart extends Component
 {
     #[Reactive]
     public $type;
@@ -45,7 +45,7 @@ class Chart extends Component
     public function render()
     {
         $this->set_data();
-        return view('livewire.backend.home.chart');
+        return view('livewire.backend.home.income-chart');
     }
 
     public function set_data()
@@ -105,6 +105,6 @@ class Chart extends Component
         }
 
         $this->total_transaction = $transaction['total_sales']['sales_income'];
-        $this->dispatch('setData', ['type' => $this->type,  'series' => $series, 'categories' => $categories, 'month' => Carbon::createFromFormat('m', $this->month)->translatedFormat('F'), 'year' => $this->year]);
+        $this->dispatch('setDataIncome', ['type' => $this->type,  'series' => $series, 'categories' => $categories, 'month' => Carbon::createFromFormat('m', $this->month)->translatedFormat('F'), 'year' => $this->year]);
     }
 }

@@ -113,11 +113,11 @@ class ProductSalesRepository implements ProductSalesInterface
                 ];
             });
 
-        $products = $products->map(function ($q) {
+        $products = $products->map(function ($q) use ($all_transactions) {
             return [
                 ...collect($q)->except('results'),
                 'results' => collect($q['results'])
-                    ->map(function ($r) {
+                    ->map(function ($r) use ($all_transactions) {
                         return [
                             ...$r,
                             'total' => [
@@ -128,7 +128,7 @@ class ProductSalesRepository implements ProductSalesInterface
                                 'cost' => collect($r['results'])
                                     ->sum('cost'),
                                 'net' => collect($r['results'])
-                                    ->sum(fn ($s) => $s['sales_income'] - $s['cost'])
+                                    ->sum(fn ($s) => $s['sales_income'] - $s['cost']),
                             ]
                         ];
                     }),
@@ -149,7 +149,7 @@ class ProductSalesRepository implements ProductSalesInterface
                         ->sum(function ($r) {
                             return collect($r['results'])
                                 ->sum(fn ($s) => $s['sales_income'] - $s['cost']);
-                        })
+                        }),
                 ]
             ];
         });
@@ -158,7 +158,7 @@ class ProductSalesRepository implements ProductSalesInterface
             'sold' => $products->sum('total.sold'),
             'sales_income' => $products->sum('total.sales_income'),
             'cost' => $products->sum('total.cost'),
-            'net' => $products->sum('total.net')
+            'net' => $products->sum('total.net'),
         ];
 
         $this->results = collect([
@@ -208,7 +208,8 @@ class ProductSalesRepository implements ProductSalesInterface
                         'sold' => $products['results']->sum(fn ($q) => $q['results']->where('month_id', $month)->sum('total.sold')),
                         'sales_income' => $products['results']->sum(fn ($q) => $q['results']->where('month_id', $month)->sum('total.sales_income')),
                         'cost' => $products['results']->sum(fn ($q) => $q['results']->where('month_id', $month)->sum('total.cost')),
-                        'net' => $products['results']->sum(fn ($q) => $q['results']->where('month_id', $month)->sum('total.net'))
+                        'net' => $products['results']->sum(fn ($q) => $q['results']->where('month_id', $month)->sum('total.net')),
+                        'total_transactions' => $products['results']->sum(fn ($q) => $q['results']->where('month_id', $month)->sum('total.total_transactions'))
                     ]
                 ];
             });

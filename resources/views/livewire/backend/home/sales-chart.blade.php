@@ -1,14 +1,13 @@
-<div
-    class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-    <div class="flex items-center justify-between mb-4">
+<div class="p-4 mb-5 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-">
+    <div class="flex flex-col justify-between mb-4 lg:items-center lg:flex-row">
         <div class="flex-shrink-0">
             <h2 class="text-2xl font-bold dark:text-white">
                 {{ __('Sales Chart') }}
             </h2>
         </div>
         <div class="text-base font-medium">
-            <div class="text-xl font-bold leading-none text-gray-900 sm:text-2xl text-end dark:text-white">
-                {{ StringHelper::currency($total_transaction, true) }}
+            <div class="text-xl font-bold leading-none text-gray-900 sm:text-2xl lg:text-end dark:text-white">
+                {{ StringHelper::currency($total_sold) }} {{ __('item') }}
             </div>
             <h3 class="text-base font-light text-gray-500 dark:text-gray-400">
                 @if ($type == 'annual')
@@ -20,7 +19,7 @@
         </div>
     </div>
     <div wire:ignore>
-        <div id="main-chart" style="min-height: 435px;"></div>
+        <div id="sales-chart" style="min-height: 435px;"></div>
     </div>
     <div class="flex items-center justify-end pt-3 mt-4 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
         <div class="flex-shrink-0">
@@ -38,20 +37,19 @@
 </div>
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script type="text/javascript">
-        const getMainChartColors = () => {
-            let mainChartColors = {}
+        const getSalesChartColors = () => {
+            let SalesChartColors = {}
 
             if (document.documentElement.classList.contains('dark')) {
-                mainChartColors = {
+                SalesChartColors = {
                     borderColor: '#374151',
                     labelColor: '#9CA3AF',
                     opacityFrom: 0,
                     opacityTo: 0.15,
                 };
             } else {
-                mainChartColors = {
+                SalesChartColors = {
                     borderColor: '#F3F4F6',
                     labelColor: '#6B7280',
                     opacityFrom: 0.45,
@@ -59,11 +57,11 @@
                 }
             }
 
-            return mainChartColors;
+            return SalesChartColors;
         }
 
-        const getOptions = (type, categories, month, year) => {
-            let mainChartColors = getMainChartColors()
+        const getSalesOptions = (type, categories, month, year) => {
+            let SalesChartColors = getSalesChartColors()
 
             options = {
                 markers: {
@@ -78,22 +76,22 @@
                     categories: categories,
                     labels: {
                         style: {
-                            colors: [mainChartColors.labelColor],
+                            colors: [SalesChartColors.labelColor],
                             fontSize: '14px',
                             fontWeight: 500,
                         },
                     },
                     axisBorder: {
-                        color: mainChartColors.borderColor,
+                        color: SalesChartColors.borderColor,
                     },
                     axisTicks: {
-                        color: mainChartColors.borderColor,
+                        color: SalesChartColors.borderColor,
                     },
                     crosshairs: {
                         show: true,
                         position: 'back',
                         stroke: {
-                            color: mainChartColors.borderColor,
+                            color: SalesChartColors.borderColor,
                             width: 1,
                             dashArray: 10,
                         },
@@ -102,7 +100,7 @@
                 yaxis: {
                     labels: {
                         style: {
-                            colors: [mainChartColors.labelColor],
+                            colors: [SalesChartColors.labelColor],
                             fontSize: '14px',
                             fontWeight: 500,
                         },
@@ -120,7 +118,7 @@
                     fontWeight: 500,
                     fontFamily: 'Inter, sans-serif',
                     labels: {
-                        colors: [mainChartColors.labelColor]
+                        colors: [SalesChartColors.labelColor]
                     },
                     itemMargin: {
                         horizontal: 10
@@ -137,10 +135,10 @@
                     }
                 }],
                 chart: {
-                    id: 'main-chart',
+                    id: 'sales-chart',
                     height: 420,
                     type: 'area',
-                    foreColor: mainChartColors.labelColor,
+                    foreColor: SalesChartColors.labelColor,
                     toolbar: {
                         show: false
                     },
@@ -153,8 +151,8 @@
                     type: 'gradient',
                     gradient: {
                         enabled: true,
-                        opacityFrom: mainChartColors.opacityFrom,
-                        opacityTo: mainChartColors.opacityTo
+                        opacityFrom: SalesChartColors.opacityFrom,
+                        opacityTo: SalesChartColors.opacityTo
                     }
                 },
                 dataLabels: {
@@ -162,7 +160,7 @@
                 },
                 grid: {
                     show: true,
-                    borderColor: mainChartColors.borderColor,
+                    borderColor: SalesChartColors.borderColor,
                     strokeDashArray: 1,
                     padding: {
                         left: 35,
@@ -200,27 +198,27 @@
             return options;
         }
 
-        let chart = new ApexCharts(document.getElementById('main-chart'), {
+        let salesChart = new ApexCharts(document.getElementById('sales-chart'), {
             series: [{
                 name: 'Dummy Data',
                 data: [1, 2]
             }],
-            ...getOptions([1, 2])
+            ...getSalesOptions([1, 2])
         });
 
-        document.addEventListener('setData', (data) => {
+        document.addEventListener('setDataSales', (data) => {
             var type = data.detail[0]['type']
             var categories = data.detail[0]['categories']
             var series = data.detail[0]['series']
             var month = data.detail[0]['month']
             var year = data.detail[0]['year']
 
-            chart.updateOptions(getOptions(type, categories, month, year))
-            chart.updateSeries(series)
+            salesChart.updateOptions(getSalesOptions(type, categories, month, year))
+            salesChart.updateSeries(series)
         })
 
         document.addEventListener('livewire:init', () => {
-            chart.render();
+            salesChart.render();
         })
     </script>
 @endpush

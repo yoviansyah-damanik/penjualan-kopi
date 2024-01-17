@@ -8,10 +8,12 @@ use App\Models\Product;
 use Livewire\Component;
 use Livewire\Attributes\Reactive;
 use App\Enums\TransactionStatusType;
+use App\Models\Category;
+use App\Models\PaymentVendor;
 
 class Statistic extends Component
 {
-    const LIMIT = 5;
+    const LIMIT = 10;
     public $date;
     #[Reactive]
     public $type;
@@ -74,7 +76,23 @@ class Statistic extends Component
             ->sortByDesc('number_of_successful_transactions')
             ->take(self::LIMIT);
 
-        return view('livewire.backend.home.statistic', compact('top_products', 'top_users'));
+        $total_products = Product::count();
+        $total_categories = Category::count();
+        $total_payment_vendors = PaymentVendor::count();
+
+        $last_product = Product::latest()->first();
+        $last_category = Category::latest()->first();
+        $last_payment_vendor = PaymentVendor::latest()->first();
+        return view('livewire.backend.home.statistic', compact(
+            'top_products',
+            'top_users',
+            'total_products',
+            'total_categories',
+            'total_payment_vendors',
+            'last_product',
+            'last_category',
+            'last_payment_vendor',
+        ));
     }
 
     public function set_date($date)

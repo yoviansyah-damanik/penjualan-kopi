@@ -1,6 +1,6 @@
 <div>
-    <div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-4">
-        <div class="grid w-full grid-cols-1 col-span-3 gap-4 mt-4 xl:grid-cols-2">
+    <div class="grid w-full grid-cols-1 gap-4 mt-4 lg:grid-cols-4">
+        <div class="grid w-full grid-cols-1 gap-4 mt-4 lg:col-span-3 lg:grid-cols-2">
             <div
                 class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <div class="w-full">
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div
-            class="w-full col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+            class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow-sm lg:col-span-1 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
             <h3 class="mb-2 text-base font-normal text-gray-500 dark:text-gray-400">
                 {{ __('Transaction Persentage') }}
             </h3>

@@ -35,7 +35,7 @@ class PaymentVendor extends Model
     {
         parent::boot();
         static::creating(function ($model) {
-            $model->id = 'PV' . sprintf('%04d', ((int) (self::count() > 0 ? substr(self::latest()->first()->id, -4) : 0)) + 1);
+            $model->id = 'PV' . sprintf('%04d', ((int) (self::count() > 0 ? substr(self::withTrashed()->latest()->first()->id, -4) : 0)) + 1);
         });
     }
 

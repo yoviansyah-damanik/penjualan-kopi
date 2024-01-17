@@ -34,6 +34,7 @@
 
     <x-livewire-alert::scripts />
     <script src="{{ asset('dashboard-assets/js/index.js') }}" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     @stack('scripts')
 </body>
 

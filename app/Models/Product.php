@@ -41,7 +41,7 @@ class Product extends Model
         static::creating(function ($model) {
             $date_now = Carbon::now()->format('mY');
 
-            $last_id = (int)substr(self::where('id', 'like', "PRO" . $date_now . "%")
+            $last_id = (int)substr(self::withTrashed()->where('id', 'like', "PRO" . $date_now . "%")
                 ->orderBy('id', 'desc')->first()?->id ?? 0, -4);
 
             $model->id = "PRO" . $date_now . sprintf('%04d', ($last_id + 1));
