@@ -28,6 +28,9 @@
     </main>
 
     @stack('scripts')
+    <script type="text/javascript">
+        document.addEventListener('livewire:init', (csrfToken) => console.log(csrfToken))
+    </script>
     <x-livewire-alert::scripts />
 </body>
 
