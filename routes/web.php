@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('guest', 'caffeinated')
+Route::middleware('guest')
     ->group(function () {
         Route::get('/login', Login::class)
             ->name('login');
