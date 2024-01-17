@@ -44,7 +44,6 @@ class Login extends Component
     }
     public function do_login()
     {
-        ddd('tes');
         $this->validate();
         try {
             $this->button_enabled = false;
@@ -70,8 +69,7 @@ class Login extends Component
 
                     session()->regenerate();
 
-                    return to_route('home');
-                    // return $this->redirect(session()->pull('url.intended', '/'));
+                    return $this->redirect(session()->pull('url.intended', '/'));
                 }
 
                 $this->button_enabled = true;
