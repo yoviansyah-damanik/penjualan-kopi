@@ -44,6 +44,7 @@ class Login extends Component
     }
     public function do_login()
     {
+        ddd('tes');
         $this->validate();
         try {
             $this->button_enabled = false;
