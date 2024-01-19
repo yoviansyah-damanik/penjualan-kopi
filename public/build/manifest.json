@@ -1,0 +1,28 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-007359b0.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/images/login-image-1.jpg": {
+    "file": "assets/login-image-1-6c410315.jpg",
+    "src": "resources/images/login-image-1.jpg"
+  },
+  "resources/images/logo.png": {
+    "file": "assets/logo-afaad586.png",
+    "src": "resources/images/logo.png"
+  },
+  "resources/images/product-default.png": {
+    "file": "assets/product-default-659d051b.png",
+    "src": "resources/images/product-default.png"
+  },
+  "resources/images/register-image-1.jpg": {
+    "file": "assets/register-image-1-761b8509.jpg",
+    "src": "resources/images/register-image-1.jpg"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-5428324b.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
