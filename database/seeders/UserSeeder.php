@@ -16,15 +16,15 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Administrator',
             'username' => 'administrator',
-            'email' => 'administrator@gmail.com',
-            'password' => bcrypt('password')
+            'email' => 'kopihtspardede@gmail.com',
+            'password' => bcrypt('HTSPardede')
         ])->assignRole('Administrator');
 
-        User::create([
-            'name' => 'User',
-            'username' => 'user',
-            'email' => 'user@gmail.com',
-            'password' => bcrypt('password')
-        ])->assignRole('User');
+        // User::create([
+        //     'name' => 'User',
+        //     'username' => 'user',
+        //     'email' => 'user@gmail.com',
+        //     'password' => bcrypt('password')
+        // ])->assignRole('User');
     }
 }

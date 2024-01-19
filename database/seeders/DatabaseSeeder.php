@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CategorySeeder::class);
         $this->call(PaymentVendorSeeder::class);
-        \App\Models\Product::factory(10)->create();
+        // \App\Models\Product::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
