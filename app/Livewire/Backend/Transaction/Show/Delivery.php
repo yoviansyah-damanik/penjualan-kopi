@@ -2,14 +2,15 @@
 
 namespace App\Livewire\Backend\Transaction\Show;
 
-use App\Enums\TransactionStatusType;
 use Exception;
 use Throwable;
 use Livewire\Component;
+use App\Jobs\SendMailJob;
 use App\Models\Transaction;
-use Illuminate\Support\Facades\DB;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
+use Illuminate\Support\Facades\DB;
+use App\Enums\TransactionStatusType;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Delivery extends Component
 {
@@ -59,6 +60,8 @@ class Delivery extends Component
             );
 
             $this->transaction->update(['status' => TransactionStatusType::Completed]);
+
+            dispatch(new SendMailJob($this->transaction, $this->transaction->user->email, 'completed'));
 
             DB::commit();
             $this->dispatch('refresh_transaction');

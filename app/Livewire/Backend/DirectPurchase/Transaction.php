@@ -67,7 +67,7 @@ class Transaction extends Component
         } else {
             $this->product_list = collect($this->product_list)
                 ->push([
-                    ...$product->only('id', 'name', 'price', 'cost', 'discount', 'final_price', 'category_name'),
+                    ...$product->only('id', 'name', 'price', 'cost', 'discount', 'final_price', 'category_name', 'weight'),
                     'qty' => 1,
                     'total' => $product->final_price
                 ]);
@@ -154,7 +154,7 @@ class Transaction extends Component
                 'cost' => 0,
                 'estimation_day' => 0,
                 'note' => __('Direct Purchase'),
-                'weight' => 0,
+                'weight' => collect($this->product_list)->sum(fn ($q) => $q['weight'] * $q['qty']),
                 'type' => 'REG',
                 'payload' => "{}",
             ]);

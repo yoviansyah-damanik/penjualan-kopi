@@ -5,9 +5,11 @@ namespace App\Livewire\Frontend\Profile\History;
 use Exception;
 use Throwable;
 use Livewire\Component;
+use App\Jobs\SendMailJob;
 use App\Models\Transaction;
 use App\Enums\DeliveryStatusType;
 use App\Enums\TransactionStatusType;
+use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Show extends Component
@@ -59,6 +61,8 @@ class Show extends Component
             $this->transaction->update([
                 'status' => TransactionStatusType::Canceled
             ]);
+
+            dispatch(new SendMailJob($this->transaction, Auth::user()->email, 'failed'));
 
             $this->alert('success', __('The :feature was successfully updated.', ['feature' => __('Order')]));
         } catch (Exception $e) {

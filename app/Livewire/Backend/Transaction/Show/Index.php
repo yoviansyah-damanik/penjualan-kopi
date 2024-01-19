@@ -6,6 +6,7 @@ use Exception;
 use Throwable;
 use App\Models\Payment;
 use Livewire\Component;
+use App\Jobs\SendMailJob;
 use App\Models\Transaction;
 use Livewire\Attributes\Layout;
 use App\Enums\PaymentStatusType;
@@ -44,6 +45,8 @@ class Index extends Component
             Payment::where('transaction_id', $this->transaction->id)->update(
                 ['status' => PaymentStatusType::PaidOff]
             );
+
+            dispatch(new SendMailJob($this->transaction, $this->transaction->user->email, 'confirmed'));
 
             DB::commit();
             $this->alert('success', __('The :feature was successfully confirmed.', ['feature' => __('Payment')]));
@@ -92,6 +95,8 @@ class Index extends Component
                 'status' => TransactionStatusType::Canceled
             ]);
             $this->transaction->payment->delete();
+
+            dispatch(new SendMailJob($this->transaction, $this->transaction->user->email, 'failed'));
 
             DB::commit();
             $this->alert('success', __('The :feature was successfully updated.', ['feature' => __('Order')]));

@@ -4,7 +4,9 @@ namespace App\Livewire\Frontend\Profile\History;
 
 use Exception;
 use Throwable;
+use App\Models\User;
 use Livewire\Component;
+use App\Jobs\SendMailJob;
 use App\Models\Transaction;
 use App\Models\PaymentVendor;
 use Livewire\WithFileUploads;
@@ -65,6 +67,8 @@ class Payment extends Component
                 'payment_vendor_id' => $this->payment_vendor,
                 'image' => $this->evidence->store('payment-images', 'public')
             ]);
+
+            dispatch(new SendMailJob($this->transaction, User::role('Administrator')->first()->email, 'pending'));
 
             DB::commit();
             $this->alert('success', __('The :feature was successfully updated.', ['feature' => __('Payment')]));

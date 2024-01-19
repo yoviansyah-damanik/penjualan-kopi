@@ -130,14 +130,16 @@
                             {{ $transaction->orderer_name }}
                         </span>
                     </div>
-                    <div>
-                        <span class="font-medium">
-                            {{ __('Route') }}:
-                        </span>
-                        <span class="text-base">
-                            {{ $transaction->shipping->origin }} - {{ $transaction->shipping->city }}
-                        </span>
-                    </div>
+                    @if (!$transaction->shipping)
+                        <div>
+                            <span class="font-medium">
+                                {{ __('Route') }}:
+                            </span>
+                            <span class="text-base">
+                                {{ $transaction->shipping->origin }} - {{ $transaction->shipping->city }}
+                            </span>
+                        </div>
+                    @endif
                     <div>
                         <span class="font-medium">
                             {{ __('Address') }}:
