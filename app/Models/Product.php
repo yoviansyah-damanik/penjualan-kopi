@@ -65,7 +65,7 @@ class Product extends Model
     protected function mainImagePath(): Attribute
     {
         return new Attribute(
-            get: fn () => filter_var($this->main_image, FILTER_VALIDATE_URL) ? $this->main_image : asset($this->main_image)
+            get: fn () => filter_var($this->main_image, FILTER_VALIDATE_URL) ? $this->main_image : asset('storage/' . $this->main_image)
         );
     }
 
@@ -73,7 +73,7 @@ class Product extends Model
     {
         return new Attribute(
             get: fn () => collect(explode(';', $this->additional_images))
-                ->map(fn ($q) => filter_var($q, FILTER_VALIDATE_URL) ? $q : asset($q))
+                ->map(fn ($q) => filter_var($q, FILTER_VALIDATE_URL) ? $q : asset('storage/' . $q))
         );
     }
 
