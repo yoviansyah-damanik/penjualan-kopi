@@ -20,11 +20,11 @@ class UserSeeder extends Seeder
             'password' => bcrypt('HTSPardede')
         ])->assignRole('Administrator');
 
-        User::create([
-            'name' => 'User',
-            'username' => 'user',
-            'email' => 'yoviansyahrizkypratama@gmail.com',
-            'password' => bcrypt('password')
-        ])->assignRole('User');
+        // User::create([
+        //     'name' => 'User',
+        //     'username' => 'user',
+        //     'email' => 'user@gmail.com',
+        //     'password' => bcrypt('password')
+        // ])->assignRole('User');
     }
 }
