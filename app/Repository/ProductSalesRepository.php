@@ -172,7 +172,7 @@ class ProductSalesRepository implements ProductSalesInterface
         $products = $this->results;
 
         $max_sold = $products['results']->sortByDesc('total.sold')
-            ->first()['total']['sold'];
+            ?->first()['total']['sold'] ?? 0;
 
         $popular_products = $products['results']
             ->where('total.sold', '!=', 0)

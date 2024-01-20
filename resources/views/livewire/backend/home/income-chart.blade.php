@@ -60,6 +60,14 @@
             return IncomeChartColors;
         }
 
+        function roundDownSignificantDigits(number, decimals) {
+            let significantDigits = (parseInt(number.toExponential().split('e-')[1])) || 0;
+            let decimalsUpdated = (decimals || 0) + significantDigits - 1;
+            decimals = Math.min(decimalsUpdated, number.toString().length);
+
+            return (Math.floor(number * Math.pow(10, decimals)) / Math.pow(10, decimals));
+        }
+
         const getIncomeOptions = (type, categories, month, year) => {
             let IncomeChartColors = getIncomeChartColors()
 
@@ -186,9 +194,14 @@
                                 return "Tidak ada"
 
                             return new Intl.NumberFormat('id-ID', {
-                                maximumSignificantDigits: 3
+                                style: "currency",
+                                currency: "IDR",
+                                currencyDisplay: "symbol",
+                                round: Math.ceil,
+                                maximumFractionDigits: 0,
                             }).format(
-                                value,
+                                value
+                                // roundDownSignificantDigits(value, 0)
                             )
                         }
                     }

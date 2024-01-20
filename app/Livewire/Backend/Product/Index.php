@@ -34,4 +34,15 @@ class Index extends Component
         $this->search = $search;
         $this->resetPage();
     }
+
+    public function closeDrawer()
+    {
+        $this->dispatch('closeDrawer');
+    }
+
+    public function setItem($product, $type)
+    {
+        $this->dispatch('set_product_data', ['product' => $product]);
+        $this->dispatch('openDrawer', $type);
+    }
 }

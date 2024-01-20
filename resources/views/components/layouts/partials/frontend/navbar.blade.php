@@ -26,10 +26,25 @@
                             <li class="nav-item">
                                 <a wire:navigate href="{{ route('about') }}">{{ __('About Us') }}</a>
                             </li>
-                            <li class="block nav-item lg:hidden">
-                                <livewire:auth.logout class_name="px-4 py-3 w-full focus:outline-none"
-                                    :title="__('Sign Out')" />
-                            </li>
+                            @auth
+                                @if (Auth::user()->is_administrator)
+                                    <li class="nav-item">
+                                        <a wire:navigate href="{{ route('dashboard.home') }}">
+                                            {{ __('Dashboard') }}
+                                        </a>
+                                    </li>
+                                @endif
+                                <li class="block nav-item lg:hidden">
+                                    <livewire:auth.logout class_name="px-4 py-3 w-full focus:outline-none text-start"
+                                        :title="__('Sign Out')" />
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a wire:navigate href="{{ route('login') }}">
+                                        {{ __('Sign In') }}
+                                    </a>
+                                </li>
+                            @endauth
                         </ul>
                     </div>
 

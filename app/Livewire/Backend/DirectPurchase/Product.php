@@ -30,4 +30,9 @@ class Product extends Component
     {
         $this->dispatch('get_product', $product->slug);
     }
+
+    public function  clear_search()
+    {
+        $this->search = '';
+    }
 }

@@ -49,8 +49,8 @@ class Index extends Component
             dispatch(new SendMailJob($this->transaction, $this->transaction->user->email, 'confirmed'));
 
             DB::commit();
+            $this->closeDrawer();
             $this->alert('success', __('The :feature was successfully confirmed.', ['feature' => __('Payment')]));
-            $this->redirect(route('dashboard.transaction.show', base64_encode($this->transaction->id)), true);
         } catch (Exception $e) {
             DB::rollBack();
             $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
@@ -74,7 +74,6 @@ class Index extends Component
 
             DB::commit();
             $this->alert('success', __('The :feature was successfully canceled.', ['feature' => __('Payment')]));
-            $this->redirect(route('dashboard.transaction.show', base64_encode($this->transaction->id)));
         } catch (Exception $e) {
             DB::rollBack();
             $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
@@ -94,7 +93,8 @@ class Index extends Component
             $this->transaction->update([
                 'status' => TransactionStatusType::Canceled
             ]);
-            $this->transaction->payment->delete();
+
+            Payment::where('transaction_id', $this->transaction->id)->delete();
 
             dispatch(new SendMailJob($this->transaction, $this->transaction->user->email, 'failed'));
 
@@ -107,5 +107,10 @@ class Index extends Component
             DB::rollBack();
             $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
         }
+    }
+
+    public function closeDrawer()
+    {
+        $this->dispatch('closeDrawer');
     }
 }

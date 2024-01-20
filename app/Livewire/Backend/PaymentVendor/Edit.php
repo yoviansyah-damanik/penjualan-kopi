@@ -76,4 +76,9 @@ class Edit extends Component
             $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
         }
     }
+
+    public function closeDrawer()
+    {
+        $this->dispatch('closeDrawer');
+    }
 }

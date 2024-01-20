@@ -14,10 +14,8 @@
                 </button>
             </div>
             <button id="createCategoryButton"
-                class="flex items-center gap-1 text-white w-full lg:w-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                type="button" data-drawer-target="drawer-create-category-default"
-                data-drawer-show="drawer-create-category-default" aria-controls="drawer-create-category-default"
-                data-drawer-placement="right">
+                class="flex items-center gap-1 text-white w-full lg:w-auto bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800"
+                type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="M11 13H6q-.425 0-.713-.288T5 12q0-.425.288-.713T6 11h5V6q0-.425.288-.713T12 5q.425 0 .713.288T13 6v5h5q.425 0 .713.288T19 12q0 .425-.288.713T18 13h-5v5q0 .425-.288.713T12 19q-.425 0-.713-.288T11 18v-5Z" />
@@ -71,10 +69,7 @@
                                 </td>
                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                     <button type="button" id="updateCategoryButton"
-                                        wire:click="$dispatch('set_category_data',{category: '{{ $category->slug }}'})"
-                                        data-drawer-target="drawer-update-category-default"
-                                        data-drawer-show="drawer-update-category-default"
-                                        aria-controls="drawer-update-category-default" data-drawer-placement="right"
+                                        wire:click="setItem('{{ $category->slug }}','update')"
                                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
                                         <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -88,10 +83,7 @@
                                         {{ __('Update') }}
                                     </button>
                                     <button type="button" id="deleteCategoryButton"
-                                        wire:click="$dispatch('set_category_data',{category: '{{ $category->slug }}'})"
-                                        data-drawer-target="drawer-delete-category-default"
-                                        data-drawer-show="drawer-delete-category-default"
-                                        aria-controls="drawer-delete-category-default" data-drawer-placement="right"
+                                        wire:click="setItem('{{ $category->slug }}','destroy')"
                                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                                         <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -125,15 +117,14 @@
     </div>
 
     {{-- Edit Category Drawer --}}
-    <div id="drawer-update-category-default"
+    <div id="drawer-update-category-default" wire:ignore.self
         class="fixed top-0 right-0 z-40 w-full h-screen max-w-sm p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800"
         tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
         <h5 id="drawer-label"
             class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">
             {{ __('Update :update', ['update' => __('Category')]) }}
         </h5>
-        <button type="button" data-drawer-dismiss="drawer-update-category-default"
-            aria-controls="drawer-update-category-default"
+        <button type="button" wire:click="closeDrawer" wire:loading.attr='disabled'
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
@@ -147,14 +138,13 @@
     </div>
 
     {{-- Delete Category Drawer --}}
-    <div id="drawer-delete-category-default"
+    <div id="drawer-delete-category-default" wire:ignore.self
         class="fixed top-0 right-0 z-40 w-full h-screen max-w-sm p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800"
         tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
         <h5 id="drawer-label"
             class="inline-flex items-center text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">
             {{ __('Delete :delete', ['delete' => __('Category')]) }}</h5>
-        <button type="button" data-drawer-dismiss="drawer-delete-category-default"
-            aria-controls="drawer-delete-category-default"
+        <button type="button" wire:click="closeDrawer" wire:loading.attr='disabled'
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
@@ -169,15 +159,14 @@
     </div>
 
     {{-- Add Category Drawer --}}
-    <div id="drawer-create-category-default"
+    <div id="drawer-create-category-default" wire:ignore.self
         class="fixed top-0 right-0 z-40 w-full h-screen max-w-sm p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800"
         tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
         <h5 id="drawer-label"
             class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">
             {{ __('New :new', ['new' => __('Category')]) }}
         </h5>
-        <button type="button" data-drawer-dismiss="drawer-create-category-default"
-            aria-controls="drawer-create-category-default"
+        <button type="button" wire:click="closeDrawer" wire:loading.attr='disabled'
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
@@ -192,12 +181,69 @@
 </div>
 
 @push('scripts')
-    <script type="text/javascript">
-        document.addEventListener('closeDrawer', (el) => {
-            // var driwerId = document.getElementById(el.detail)
-            // var drawer_2 = getInstance('Drawer', drawerId);
+    <script type="module">
+        // set the drawer menu element
+        const $updateTargetEl = document.getElementById('drawer-update-category-default')
+        const $createTargetEl = document.getElementById('drawer-create-category-default')
+        const $destroyTargetEl = document.getElementById('drawer-delete-category-default')
 
-            // driwerId.hide();
+        // options with default values
+        const options = {
+            placement: 'right',
+            backdrop: true,
+            bodyScrolling: false,
+            edge: false,
+            edgeOffset: '',
+            backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-30',
+            // onHide: () => {
+            //     console.log('drawer is hidden');
+            // },
+            // onShow: () => {
+            //     console.log('drawer is shown');
+            // },
+            // onToggle: () => {
+            //     console.log('drawer has been toggled');
+            // },
+        }
+
+        // instance options object
+        const createInstanceOptions = {
+            id: 'drawer-create-category-default',
+            override: true
+        }
+
+        const updateInstanceOptions = {
+            id: 'drawer-update-category-default',
+            override: true
+        }
+
+        const destroyInstanceOptions = {
+            id: 'drawer-destroy-category-default',
+            override: true
+        }
+
+        const updateDrawer = new Drawer($updateTargetEl, options, updateInstanceOptions)
+        const createDrawer = new Drawer($createTargetEl, options, createInstanceOptions)
+        const destroyDrawer = new Drawer($destroyTargetEl, options, destroyInstanceOptions)
+
+        const closeDrawer = () => {
+            createDrawer.hide()
+            updateDrawer.hide()
+            destroyDrawer.hide()
+        }
+
+        document.addEventListener('openDrawer', (type) => {
+            type = type.detail[0]
+            if (type == 'update')
+                updateDrawer.show()
+            else if (type == 'destroy')
+                destroyDrawer.show()
+            else
+                createDrawer.show()
         })
+
+        document.addEventListener('closeDrawer', () => closeDrawer())
+
+        document.getElementById('createCategoryButton').addEventListener('click', () => createDrawer.show())
     </script>
 @endpush

@@ -215,10 +215,11 @@
         </div>
 
         <p class="mt-3">
-            Segera lakukan pemeriksaan terhadap transaksi yang dilakukan melalui link berikut ini.
+            Pembayaran anda telah dikonfirmasi. Anda dapat melihat perkembangan status pesanan anda melalui link di
+            bawah ini.
         </p>
-        <a href="{{ route('dashboard.transaction.show', base64_encode($transaction->id)) }}"
-            target="_blank">{{ route('dashboard.transaction.show', base64_encode($transaction->id)) }}</a>
+        <a href="{{ route('profile.history.detail', base64_encode($transaction->id)) }}"
+            target="_blank">{{ route('profile.history.detail', base64_encode($transaction->id)) }}</a>
 
         <p class="mt-3 italic">
             Mohon untuk tidak membalas pesan ini. Pesan ini dikirimkan secara otomatis oleh aplikasi

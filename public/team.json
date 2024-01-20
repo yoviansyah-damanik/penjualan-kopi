@@ -1,6 +1,6 @@
 [
     {
-        "name": "Nama Pemilik",
+        "name": "H. Taris Pardede",
         "gender": "L",
         "position": "Pemilik",
         "platform": {
@@ -10,9 +10,9 @@
         }
     },
     {
-        "name": "Nama Petugas",
+        "name": "Sariawan Nasution",
         "gender": "P",
-        "position": "Sales",
+        "position": "Keuangan",
         "platform": {
             "facebook": "#",
             "twitter": "#",
@@ -20,9 +20,19 @@
         }
     },
     {
-        "name": "Nama Petugas",
+        "name": "Eva Yanti Tambunan",
         "gender": "L",
-        "position": "Sales",
+        "position": "Kasir",
+        "platform": {
+            "facebook": "#",
+            "twitter": "#",
+            "instagram": "#"
+        }
+    },
+    {
+        "name": "Zulkifli Pardede",
+        "gender": "L",
+        "position": "Pengolah Kopi",
         "platform": {
             "facebook": "#",
             "twitter": "#",

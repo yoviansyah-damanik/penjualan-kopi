@@ -5,6 +5,7 @@ namespace App\Livewire\Frontend\Profile\History;
 use Exception;
 use Throwable;
 use Livewire\Component;
+use App\Models\Delivery;
 use App\Jobs\SendMailJob;
 use App\Models\Transaction;
 use App\Enums\DeliveryStatusType;
@@ -37,7 +38,7 @@ class Show extends Component
         if ($this->transaction->status != TransactionStatusType::Completed)
             return $this->alert('error', __('Action cannot be performed'), ['text' => __('This transaction has not yet been completed.')]);
         try {
-            $this->transaction->delivery->update([
+            Delivery::where('transaction_id', $this->transaction->id)->update([
                 'status' => DeliveryStatusType::Arrived
             ]);
 

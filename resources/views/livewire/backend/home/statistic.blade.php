@@ -8,7 +8,7 @@
                     {{ StringHelper::currency($total_products) }}
                 </span>
                 <div class="font-light">
-                    {{ __('Last added') }}: {{ $last_product->name }}
+                    {{ __('Last added') }}: {{ $last_product?->name ?? '-' }}
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
                     {{ StringHelper::currency($total_categories) }}
                 </span>
                 <div class="font-light">
-                    {{ __('Last added') }}: {{ $last_category->name }}
+                    {{ __('Last added') }}: {{ $last_category?->name ?? '-' }}
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                     {{ StringHelper::currency($total_payment_vendors) }}
                 </span>
                 <div class="font-light">
-                    {{ __('Last added') }}: {{ $last_payment_vendor->name }}
+                    {{ __('Last added') }}: {{ $last_payment_vendor?->name ?? '-' }}
                 </div>
             </div>
         </div>

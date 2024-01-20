@@ -237,6 +237,34 @@
                 </div>
             </div>
         </div>
+
+        <div class="mb-5 space-y-1 text-end">
+            <div>
+                <strong>{{ __('Sub Total') }}:</strong>
+                <span>
+                    {{ StringHelper::currency($transaction->details->sum('total'), true) }}
+                </span>
+            </div>
+            <div>
+                <strong>{{ __('Shipping Cost') }}:</strong>
+                <span>
+                    {{ StringHelper::currency($transaction->shipping->cost, true) }}
+                </span>
+            </div>
+            <div>
+                <strong>{{ __('Unique Code') }}:</strong>
+                <span>
+                    {{ StringHelper::currency($transaction->unique_code) }}
+                </span>
+            </div>
+            <div class="!mt-3">
+                <strong>{{ __('Total') }}</strong>
+                <div class="text-2xl font-extrabold">
+                    {{ StringHelper::currency($transaction->total_payment, true) }}
+                </div>
+            </div>
+        </div>
+
         <div class="grid grid-cols-6 gap-3">
             <div class="col-span-6 lg:col-span-3">
                 <div class="mb-1 font-bold">
@@ -245,8 +273,7 @@
                 @if (
                     $transaction->status != \App\Enums\TransactionStatusType::Canceled &&
                         $transaction?->payment->status == \App\Enums\PaymentStatusType::WaitingForConfirmation)
-                    <button type="button" data-modal-toggle="proof-of-payment-modal"
-                        data-modal-target="proof-of-payment-modal"
+                    <button type="button" wire:click="$dispatch('openDrawer')"
                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" viewBox="0 0 24 24">
                             <path fill="currentColor"
@@ -319,68 +346,93 @@
         </div>
     </div>
 
-    {{-- PROOF OF PAYMENT MODAL --}}
-    @if (
-        $transaction->status != \App\Enums\TransactionStatusType::Canceled &&
-            $transaction?->payment->status == \App\Enums\PaymentStatusType::WaitingForConfirmation)
-        <div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto dark:text-white top-4 md:inset-0 h-modal sm:h-full"
-            id="proof-of-payment-modal">
-            <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
-                    <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
-                        <h3 class="text-xl font-semibold dark:text-white">
-                            {{ __('Proof of Payment') }}
-                        </h3>
-                        <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
-                            data-modal-toggle="proof-of-payment-modal">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="max-h-[80vh] overflow-y-auto">
-                        <div class="p-6 space-y-6">
-                            <div class="space-y-1">
-                                <div>
-                                    <span class="font-bold">
-                                        {{ __('Payment Vendor') }}:
-                                    </span>
-                                    <span> {{ $transaction->payment->payment_vendor->name }}</span>
-                                </div>
-                                <div>
-                                    <span class="font-bold">
-                                        {{ __('Account Number') }}:
-                                    </span>
-                                    <span
-                                        class="text-bold">{{ $transaction->payment->payment_vendor->account_number }}</span>
-                                </div>
-                            </div>
-                            <img class="max-w-full mx-auto" src="{{ $transaction->payment->image_path }}"
-                                alt="{{ __('Proof of Payment') }} Image">
+    {{-- PROOF OF PAYMENT DRAWER --}}
+    <div class="fixed top-0 left-0 right-0 z-40 w-full max-w-4xl p-4 mx-auto transition-transform -translate-y-full bg-white dark:bg-gray-800"
+        id="proof-of-payment-drawer">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+            <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
+                <h3 class="text-xl font-semibold dark:text-white">
+                    {{ __('Proof of Payment') }}
+                </h3>
+                <button type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
+                    wire:click='closeDrawer'>
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="max-h-[80vh] overflow-y-auto">
+                <div class="p-6 space-y-6">
+                    <div class="space-y-1">
+                        <div>
+                            <span class="font-bold">
+                                {{ __('Payment Vendor') }}:
+                            </span>
+                            <span> {{ $transaction->payment->payment_vendor->name }}</span>
+                        </div>
+                        <div>
+                            <span class="font-bold">
+                                {{ __('Account Number') }}:
+                            </span>
+                            <span class="text-bold">{{ $transaction->payment->payment_vendor->account_number }}</span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3 p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
-                        <button wire:click='confirmation_payment' wire:loading.attr='disabled'
-                            class="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
-                            type="button">{{ __('Confirmation') }}
-                        </button>
-                        <button type="button" data-modal-toggle="proof-of-payment-modal"
-                            class="inline-flex justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-orange-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                            <svg aria-hidden="true" class="w-5 h-5 -ml-1 sm:mr-1" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12">
-                                </path>
-                            </svg>
-                            {{ __('Close') }}
-                        </button>
-                    </div>
+                    <img class="max-w-full mx-auto" src="{{ $transaction->payment->image_path }}"
+                        alt="{{ __('Proof of Payment') }} Image">
                 </div>
             </div>
+            <div class="flex items-center gap-3 p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
+                <button wire:click='confirmation_payment' wire:loading.attr='disabled'
+                    class="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                    type="button">{{ __('Confirmation') }}
+                </button>
+                <button type="button" wire:click="closeDrawer" wire:loading.attr='disabled'
+                    class="inline-flex justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-orange-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                    <svg aria-hidden="true" class="w-5 h-5 -ml-1 sm:mr-1" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                    {{ __('Close') }}
+                </button>
+            </div>
         </div>
-    @endif
+    </div>
 </div>
+
+@push('scripts')
+    <script type="module">
+        // set the drawer menu element
+        const $targetEl = document.getElementById('proof-of-payment-drawer')
+
+        // options with default values
+        const options = {
+            placement: 'top',
+            backdrop: true,
+            bodyScrolling: false,
+            edge: false,
+            edgeOffset: '',
+            backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-30',
+        }
+
+        // instance options object
+        const instanceOptions = {
+            id: 'proof-of-payment-drawer',
+            override: true
+        }
+
+        const drawer = new Drawer($targetEl, options, instanceOptions)
+
+        const closeDrawer = () => {
+            drawer.hide()
+        }
+
+        document.addEventListener('openDrawer', (type) => drawer.show())
+
+        document.addEventListener('closeDrawer', () => closeDrawer())
+    </script>
+@endpush

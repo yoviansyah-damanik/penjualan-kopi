@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Frontend\Profile\History;
 
-use App\Enums\DeliveryStatusType;
 use Exception;
 use Throwable;
 use Livewire\Component;
+use App\Models\Delivery;
 use App\Models\Transaction;
+use App\Enums\DeliveryStatusType;
 use App\Enums\TransactionStatusType;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -50,7 +51,7 @@ class Item extends Component
             return $this->alert('error', __('Action cannot be performed'), ['text' => __('This transaction has not yet been completed.')]);
 
         try {
-            $this->transaction->delivery->update([
+            Delivery::where('transaction_id', $this->transaction->id)->update([
                 'status' => DeliveryStatusType::Arrived
             ]);
 

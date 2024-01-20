@@ -31,4 +31,15 @@ class Index extends Component
         $this->search = $search;
         $this->resetPage();
     }
+
+    public function closeDrawer()
+    {
+        $this->dispatch('closeDrawer');
+    }
+
+    public function setItem($payment_vendor, $type)
+    {
+        $this->dispatch('set_payment_vendor_data', ['payment_vendor' => $payment_vendor]);
+        $this->dispatch('openDrawer', $type);
+    }
 }

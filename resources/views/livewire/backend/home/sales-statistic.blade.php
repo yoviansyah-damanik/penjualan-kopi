@@ -49,8 +49,8 @@
                 </div>
                 <div class="w-full h-4 bg-gray-200 rounded-full dark:bg-gray-700">
                     <div class="h-4 text-xs text-gray-700 bg-yellow-300 rounded-full dark:bg-yellow-200 text-end pe-2 min-w-[2rem]"
-                        style="width: {{ $waiting_for_confirmation_transactions != 0 || $total_transactions != 0 ? ($waiting_for_confirmation_transactions / $total_transactions) * 100 : 0 }}%">
-                        {{ $waiting_for_confirmation_transactions != 0 || $total_transactions != 0 ? ($waiting_for_confirmation_transactions / $total_transactions) * 100 : 0 }}%
+                        style="width: {{ $waiting_for_confirmation_transactions != 0 || $total_transactions != 0 ? round(($waiting_for_confirmation_transactions / $total_transactions) * 100) : 0 }}%">
+                        {{ $waiting_for_confirmation_transactions != 0 || $total_transactions != 0 ? round(($waiting_for_confirmation_transactions / $total_transactions) * 100) : 0 }}%
                     </div>
                 </div>
             </div>
@@ -60,8 +60,8 @@
                 </div>
                 <div class="w-full h-4 bg-gray-200 rounded-full dark:bg-gray-700">
                     <div class="h-4 text-xs text-gray-700 rounded-full bg-cyan-300 dark:bg-cyan-200 text-end pe-2 min-w-[2rem]"
-                        style="width: {{ $waiting_for_delivery_transactions != 0 || $total_transactions != 0 ? ($waiting_for_delivery_transactions / $total_transactions) * 100 : 0 }}%">
-                        {{ $waiting_for_delivery_transactions != 0 || $total_transactions != 0 ? ($waiting_for_delivery_transactions / $total_transactions) * 100 : 0 }}%
+                        style="width: {{ $waiting_for_delivery_transactions != 0 || $total_transactions != 0 ? round(($waiting_for_delivery_transactions / $total_transactions) * 100) : 0 }}%">
+                        {{ $waiting_for_delivery_transactions != 0 || $total_transactions != 0 ? round(($waiting_for_delivery_transactions / $total_transactions) * 100) : 0 }}%
                     </div>
                 </div>
             </div>
@@ -71,8 +71,8 @@
                 </div>
                 <div class="w-full h-4 bg-gray-200 rounded-full dark:bg-gray-700">
                     <div class="h-4 text-xs text-gray-700 bg-red-300 rounded-full dark:bg-red-200 text-end pe-2 min-w-[2rem]"
-                        style="width: {{ $canceled_transactions != 0 || $total_transactions != 0 ? ($canceled_transactions / $total_transactions) * 100 : 0 }}%">
-                        {{ $canceled_transactions != 0 || $total_transactions != 0 ? ($canceled_transactions / $total_transactions) * 100 : 0 }}%
+                        style="width: {{ $canceled_transactions != 0 || $total_transactions != 0 ? round(($canceled_transactions / $total_transactions) * 100) : 0 }}%">
+                        {{ $canceled_transactions != 0 || $total_transactions != 0 ? round(($canceled_transactions / $total_transactions) * 100) : 0 }}%
                     </div>
                 </div>
             </div>
@@ -82,8 +82,8 @@
                 </div>
                 <div class="w-full h-4 bg-gray-200 rounded-full dark:bg-gray-700">
                     <div class="h-4 text-xs text-gray-700 bg-green-300 rounded-full dark:bg-green-200 text-end pe-2 min-w-[2rem]"
-                        style="width: {{ $completed_transactions != 0 || $total_transactions != 0 ? ($completed_transactions / $total_transactions) * 100 : 0 }}%">
-                        {{ $completed_transactions != 0 || $total_transactions != 0 ? ($completed_transactions / $total_transactions) * 100 : 0 }}%
+                        style="width: {{ $completed_transactions != 0 || $total_transactions != 0 ? round(($completed_transactions / $total_transactions) * 100) : 0 }}%">
+                        {{ $completed_transactions != 0 || $total_transactions != 0 ? round(($completed_transactions / $total_transactions) * 100) : 0 }}%
                     </div>
                 </div>
             </div>

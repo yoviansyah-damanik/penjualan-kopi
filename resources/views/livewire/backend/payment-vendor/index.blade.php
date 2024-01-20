@@ -4,7 +4,7 @@
             <div class="relative flex-none w-full mt-1 mb-3 lg:w-48 sm:w-64 xl:w-96">
                 <input type="text" wire:change="resetPage" wire:model.live='search'
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-950 focus:border-orange-950 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-950 dark:focus:border-orange-950"
-                    placeholder="{{ __('Search for :search by :1 or :2', ['search' => __('payment vendors'), '1' => 'id', '2' => __(':name name', ['name' => __('payment vendor')])]) }}">
+                    placeholder="{{ __('Search for :search by :1 or :2', ['search' => __('payment vendors'), '1' => 'id', '2' => __('name')]) }}">
                 <button wire:click='clear_search'
                     class="absolute text-gray-300 duration-75 -translate-y-1/2 hover:text-gray-700 top-1/2 right-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -13,11 +13,9 @@
                     </svg>
                 </button>
             </div>
-            <button id="createPayment VendorButton"
-                class="flex items-center gap-1 text-white w-full lg:w-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                type="button" data-drawer-target="drawer-create-payment-vendor-default"
-                data-drawer-show="drawer-create-payment-vendor-default"
-                aria-controls="drawer-create-payment-vendor-default" data-drawer-placement="right">
+            <button id="createPaymentVendorButton"
+                class="flex items-center gap-1 text-white w-full lg:w-auto bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800"
+                type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="M11 13H6q-.425 0-.713-.288T5 12q0-.425.288-.713T6 11h5V6q0-.425.288-.713T12 5q.425 0 .713.288T13 6v5h5q.425 0 .713.288T19 12q0 .425-.288.713T18 13h-5v5q0 .425-.288.713T12 19q-.425 0-.713-.288T11 18v-5Z" />
@@ -90,11 +88,7 @@
                                 </td>
                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                     <button type="button" id="updatePayment VendorButton"
-                                        wire:click="$dispatch('set_payment_vendor_data',{payment_vendor: '{{ $payment_vendor->slug }}'})"
-                                        data-drawer-target="drawer-update-payment-vendor-default"
-                                        data-drawer-show="drawer-update-payment-vendor-default"
-                                        aria-controls="drawer-update-payment-vendor-default"
-                                        data-drawer-placement="right"
+                                        wire:click="setItem('{{ $payment_vendor->slug }}','update')"
                                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
                                         <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -108,11 +102,7 @@
                                         {{ __('Update') }}
                                     </button>
                                     <button type="button" id="deletePayment VendorButton"
-                                        wire:click="$dispatch('set_payment_vendor_delete_data',{payment_vendor: '{{ $payment_vendor->slug }}'})"
-                                        data-drawer-target="drawer-delete-payment-vendor-default"
-                                        data-drawer-show="drawer-delete-payment-vendor-default"
-                                        aria-controls="drawer-delete-payment-vendor-default"
-                                        data-drawer-placement="right"
+                                        wire:click="setItem('{{ $payment_vendor->slug }}','update')"
                                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                                         <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -146,15 +136,14 @@
     </div>
 
     {{-- Edit Payment Vendor Drawer --}}
-    <div id="drawer-update-payment-vendor-default"
+    <div id="drawer-update-payment-vendor-default" wire:ignore.self
         class="fixed top-0 right-0 z-40 w-full h-screen max-w-sm p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800"
         tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
         <h5 id="drawer-label"
             class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">
             {{ __('Update :update', ['update' => __('Payment Vendor')]) }}
         </h5>
-        <button type="button" data-drawer-dismiss="drawer-update-payment-vendor-default"
-            aria-controls="drawer-update-payment-vendor-default"
+        <button type="button" wire:click="closeDrawer" wire:loading.attr='disabled'
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
@@ -168,14 +157,13 @@
     </div>
 
     {{-- Delete Payment Vendor Drawer --}}
-    <div id="drawer-delete-payment-vendor-default"
+    <div id="drawer-delete-payment-vendor-default" wire:ignore.self
         class="fixed top-0 right-0 z-40 w-full h-screen max-w-sm p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800"
         tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
         <h5 id="drawer-label"
             class="inline-flex items-center text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">
             {{ __('Delete :delete', ['delete' => __('Payment Vendor')]) }}</h5>
-        <button type="button" data-drawer-dismiss="drawer-delete-payment-vendor-default"
-            aria-controls="drawer-delete-payment-vendor-default"
+        <button type="button" wire:click="closeDrawer" wire:loading.attr='disabled'
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
@@ -190,15 +178,14 @@
     </div>
 
     {{-- Add Payment Vendor Drawer --}}
-    <div id="drawer-create-payment-vendor-default"
+    <div id="drawer-create-payment-vendor-default" wire:ignore.self
         class="fixed top-0 right-0 z-40 w-full h-screen max-w-sm p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800"
         tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
         <h5 id="drawer-label"
             class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">
             {{ __('New :new', ['new' => __('Payment Vendor')]) }}
         </h5>
-        <button type="button" data-drawer-dismiss="drawer-create-payment-vendor-default"
-            aria-controls="drawer-create-payment-vendor-default"
+        <button type="button" wire:click="closeDrawer" wire:loading.attr='disabled'
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
@@ -213,12 +200,69 @@
 </div>
 
 @push('scripts')
-    <script type="text/javascript">
-        document.addEventListener('closeDrawer', (el) => {
-            // var driwerId = document.getElementById(el.detail)
-            // var drawer_2 = getInstance('Drawer', drawerId);
+    <script type="module">
+        // set the drawer menu element
+        const $updateTargetEl = document.getElementById('drawer-update-payment-vendor-default')
+        const $createTargetEl = document.getElementById('drawer-create-payment-vendor-default')
+        const $destroyTargetEl = document.getElementById('drawer-delete-payment-vendor-default')
 
-            // driwerId.hide();
+        // options with default values
+        const options = {
+            placement: 'right',
+            backdrop: true,
+            bodyScrolling: false,
+            edge: false,
+            edgeOffset: '',
+            backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-30',
+            // onHide: () => {
+            //     console.log('drawer is hidden');
+            // },
+            // onShow: () => {
+            //     console.log('drawer is shown');
+            // },
+            // onToggle: () => {
+            //     console.log('drawer has been toggled');
+            // },
+        }
+
+        // instance options object
+        const createInstanceOptions = {
+            id: 'drawer-create-payment-vendor-default',
+            override: true
+        }
+
+        const updateInstanceOptions = {
+            id: 'drawer-update-payment-vendor-default',
+            override: true
+        }
+
+        const destroyInstanceOptions = {
+            id: 'drawer-destroy-payment-vendor-default',
+            override: true
+        }
+
+        const updateDrawer = new Drawer($updateTargetEl, options, updateInstanceOptions)
+        const createDrawer = new Drawer($createTargetEl, options, createInstanceOptions)
+        const destroyDrawer = new Drawer($destroyTargetEl, options, destroyInstanceOptions)
+
+        const closeDrawer = () => {
+            createDrawer.hide()
+            updateDrawer.hide()
+            destroyDrawer.hide()
+        }
+
+        document.addEventListener('openDrawer', (type) => {
+            type = type.detail[0]
+            if (type == 'update')
+                updateDrawer.show()
+            else if (type == 'destroy')
+                destroyDrawer.show()
+            else
+                createDrawer.show()
         })
+
+        document.addEventListener('closeDrawer', () => closeDrawer())
+
+        document.getElementById('createPaymentVendorButton').addEventListener('click', () => createDrawer.show())
     </script>
 @endpush
