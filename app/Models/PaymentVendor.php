@@ -42,7 +42,7 @@ class PaymentVendor extends Model
     protected function imagePath(): Attribute
     {
         return new Attribute(
-            get: fn () => filter_var($this->main_image, FILTER_VALIDATE_URL) ? $this->image : asset('storage/' . $this->image)
+            get: fn () => $this->type == 'hide' ? $this->image : (filter_var($this->main_image, FILTER_VALIDATE_URL) ? $this->image : asset('storage/' . $this->image))
         );
     }
 
