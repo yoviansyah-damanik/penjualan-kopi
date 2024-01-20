@@ -28,7 +28,7 @@
                             </li>
                             @auth
                                 @if (Auth::user()->is_administrator)
-                                    <li class="nav-item">
+                                    <li class="block nav-item lg:hidden">
                                         <a wire:navigate href="{{ route('dashboard.home') }}">
                                             {{ __('Dashboard') }}
                                         </a>
@@ -39,7 +39,7 @@
                                         :title="__('Sign Out')" />
                                 </li>
                             @else
-                                <li class="nav-item">
+                                <li class="block nav-item lg:hidden">
                                     <a wire:navigate href="{{ route('login') }}">
                                         {{ __('Sign In') }}
                                     </a>
