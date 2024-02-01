@@ -44,7 +44,7 @@
         new Splide('.splide', {
             type: 'loop',
             autoplay: true,
-            perPage: 3,
+            perPage: {{ $product->additional_images ? 3 : 1 }},
             perMove: 1,
             focus: 'center',
             trimSpace: false,
