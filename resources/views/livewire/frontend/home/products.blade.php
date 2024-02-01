@@ -16,48 +16,20 @@
         <div class="justify-start row">
             @forelse ($products as $product)
                 <div class="w-1/2 lg:w-1/4">
-                    <div class="relative px-2 py-4 mx-2 mb-4 overflow-hidden duration-300 rounded-lg group lg:mt-6 lg:mx-3 lg:px-3 lg:py-6 wow fadeIn"
-                        data-wow-duration="1s" data-wow-delay="0.2s">
-                        <img @class([
-                            'w-64',
-                            'mx-auto',
-                            'aspect-square',
-                            'grayscale' => !$product->is_ready,
-                        ]) src="{{ $product->main_image_path }}"
-                            alt="{{ $product->name }} Image">
-                        <div class="mt-4">
-                            <h4
-                                class="block overflow-hidden text-base font-bold text-gray-900 lg:text-xl text-ellipsis whitespace-nowrap">
-                                {{ $product->name }}
-                            </h4>
-                            <div class="mb-4 text-sm font-light">
-                                {{ $product->category_name }}
-                            </div>
-                            <p class="mb-4 text-sm line-clamp-3 lg:text-base">
-                                {{ $product->excerpt }}
-                            </p>
-                            <div @class([
-                                'flex',
-                                'items-end',
-                                'justify-between',
-                                '!justify-end' => !$product->discount,
-                            ])>
-                                @if ($product->discount)
-                                    <span
-                                        class="relative text-sm before:block before:w-full before:border-t-[3px] before:border-red-300 before:h-3 before:absolute before:bottom-0 before:left-0 before:rotate-[-7deg]">
-                                        {{ StringHelper::currency($product->price, true) }}
-                                    </span>
-                                    <div class="text-xl font-bold text-orange-900">
-                                        {{ StringHelper::currency($product->final_price, true) }}
-                                    </div>
-                                @else
-                                    <div class="text-xl font-bold text-orange-900">
-                                        {{ StringHelper::currency($product->price, true) }}
-                                    </div>
-                                @endif
-                            </div>
+                    <div class="mx-2 mb-3 duration-300 bg-white group lg:mt-3 lg:mx-3 wow fadeIn" data-wow-duration="1s"
+                        data-wow-delay="0.2s">
+                        <div
+                            class="relative flex items-center justify-center w-full overflow-hidden rounded-lg aspect-square">
+                            <img @class([
+                                'duration-300',
+                                'group-hover:scale-125',
+                                'w-full',
+                                'grayscale' => !$product->is_ready,
+                            ]) src="{{ $product->main_image_path }}"
+                                alt="{{ $product->name }} Image">
+
                             <div
-                                class="absolute inset-0 flex items-center justify-center gap-3 transition duration-300 opacity-0 group-hover:opacity-100 group-hover:z-10 -z-10 bg-orange-950/10">
+                                class="absolute bg-[#991b1b]/30 py-4 inset-0 flex items-center justify-center gap-3 transition duration-300 opacity-0 group-hover:opacity-100 z-10">
                                 @guest
                                     <a href="{{ route('login') }}"
                                         class="rounded-lg bg-[#991b1b] text-white grid place-items-center w-14 h-9 hover:bg-[#3C2A21] transition duration-100">
@@ -83,6 +55,42 @@
                                             d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5h1.1c-.1-.3-.1-.6-.1-1s0-.7.1-1.1c-.4 0-.7.1-1.1.1c-3.8 0-7.2-2.1-8.8-5.5c1.6-3.4 5-5.5 8.8-5.5s7.2 2.1 8.8 5.5c-.1.2-.3.4-.4.7c.7.2 1.3.4 1.9.8c.3-.5.5-1 .7-1.5c-1.7-4.4-6-7.5-11-7.5M12 9c-1.7 0-3 1.3-3 3s1.3 3 3 3s3-1.3 3-3s-1.3-3-3-3m7 12v-2h-4v-2h4v-2l3 3z" />
                                     </svg>
                                 </a>
+                            </div>
+                        </div>
+                        <div class="pb-4 mt-3">
+                            <h4
+                                class="block px-3 overflow-hidden text-base font-bold text-gray-900 lg:text-xl text-ellipsis whitespace-nowrap">
+                                {{ $product->name }}
+                            </h4>
+                            <div class="px-3 mb-4 text-sm font-light">
+                                {{ $product->category_name }}
+                            </div>
+                            <div class="mb-4 text-sm line-clamp-3 lg:text-base min-h-24">
+                                <div class="px-3 text-gray-500">
+                                    {{ $product->excerpt }}
+                                </div>
+                            </div>
+                            <div @class([
+                                'flex',
+                                'px-3',
+                                'items-end',
+                                'lg:justify-between',
+                                'justify-end',
+                                '!justify-end' => !$product->discount,
+                            ])>
+                                @if ($product->discount)
+                                    <span
+                                        class="hidden lg:block relative text-sm before:block before:w-full before:border-t-[3px] before:border-red-300 before:h-3 before:absolute before:bottom-0 before:left-0 before:rotate-[-7deg]">
+                                        {{ StringHelper::currency($product->price, true) }}
+                                    </span>
+                                    <div class="text-xl font-bold text-orange-900">
+                                        {{ StringHelper::currency($product->final_price, true) }}
+                                    </div>
+                                @else
+                                    <div class="text-xl font-bold text-orange-900">
+                                        {{ StringHelper::currency($product->price, true) }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
