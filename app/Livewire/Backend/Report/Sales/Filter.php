@@ -4,7 +4,7 @@ namespace App\Livewire\Backend\Report\Sales;
 
 use Carbon\Carbon;
 use Livewire\Component;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Repository\ProductSalesRepository;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -55,9 +55,9 @@ class Filter extends Component
             $this->set_data();
             $this->dispatch('set_preview', ['type' => $this->type, 'month' => $this->month, 'year' => $this->year, 'products' => $this->products]);
         } catch (\Exception $e) {
-            $this->alert('error', __('Something went wrong!'));
+            $this->alert('error', __('Something went wrong!'), ['text' => $e->getMessage()]);
         } catch (\Throwable $e) {
-            $this->alert('error', __('Something went wrong!'));
+            $this->alert('error', __('Something went wrong!'), ['text' => $e->getMessage()]);
         }
     }
 

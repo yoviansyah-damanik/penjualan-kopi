@@ -59,9 +59,8 @@ class ProductSalesRepository implements ProductSalesInterface
             ->where('transactions.status', TransactionStatusType::Completed)
             ->get();
 
-        $products = Product::select('id', 'main_image', 'name')
-            ->with('category:id,name')
-            ->with('details')
+        $products = Product::select('id', 'main_image', 'name', 'category_id')
+            ->with(['category:id,name', 'details'])
             ->get()
             ->map(function ($product) use ($all_transactions, $year) {
                 $exist = $all_transactions

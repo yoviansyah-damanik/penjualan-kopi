@@ -4,7 +4,7 @@ namespace App\Livewire\Backend\Report\Income;
 
 use Carbon\Carbon;
 use Livewire\Component;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Repository\ProductSalesRepository;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
