@@ -15,7 +15,7 @@ class Payment extends Model
     protected function imagePath(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->image ? asset('storage' . $this->image) : asset('branding-assets/images/avatar/avatar-1.png')
+            get: fn () => $this->image ? asset('storage/' . $this->image) : asset('branding-assets/images/avatar/avatar-1.png')
         );
     }
 

@@ -7,7 +7,7 @@
                         <li class="splide__slide">
                             <img src="{{ $product->main_image_path }}" alt="{{ $product->name }} Image">
                         </li>
-                        @if ($product->additional_image_paths->count() > 0)
+                        @if ($product->additional_image_paths && $product->additional_image_paths->count() > 0)
                             @foreach ($product->additional_image_paths as $path)
                                 <li class="splide__slide">
                                     <img src="{{ $path }}" alt="{{ $product->name }} Image">
