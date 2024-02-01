@@ -39,7 +39,7 @@
         <div
             class="absolute lg:flex-row flex flex-col lg:items-baseline lg:justify-between bottom-0 left-0 right-0 w-[95%] mx-auto mb-5">
             <div class="text-3xl font-bold text-red-500 text-end lg:text-start lg:mb-0">
-                {{ StringHelper::currency($carts->sum(fn($q) => $q->product->is_ready == true ? $q->product->final_price : 0), true) }}
+                {{ StringHelper::currency($carts->sum(fn($q) => $q->product->is_ready == true ? $q->product->final_price * $q->qty : 0), true) }}
             </div>
 
             <a href="{{ route('transaction') }}" wire:navigate
