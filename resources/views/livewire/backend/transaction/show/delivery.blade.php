@@ -50,9 +50,8 @@
                 </span>
             </div>
         </div>
-    @else
-        <div class="my-3 border-t"></div>
     @endif
+    <div class="my-3 border-t"></div>
     <form wire:submit="store_delivery">
         <div class="space-y-4">
             <div>
