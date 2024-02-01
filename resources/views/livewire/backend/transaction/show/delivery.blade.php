@@ -51,7 +51,7 @@
             </div>
         </div>
     @endif
-    @if ($transaction->delivery->status == \App\Enums\DeliveryStatusType::OnDelivery)
+    @if ($transaction?->delivery->status == \App\Enums\DeliveryStatusType::OnDelivery)
         <div class="my-3 border-t"></div>
         <form wire:submit="store_delivery">
             <div class="space-y-4">
