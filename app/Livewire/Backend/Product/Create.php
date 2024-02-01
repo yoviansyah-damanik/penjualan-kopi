@@ -102,9 +102,9 @@ class Create extends Component
                 foreach ($this->additional_images as $image) {
                     array_push($path_of_additional_images, $image->store('product-images', 'public'));
                 }
+                $new_product->additional_images = collect($path_of_additional_images)->implode(';');
             }
 
-            $new_product->additional_images = collect($path_of_additional_images)->implode(';');
             $new_product->save();
 
             $this->alert('success', __('The :feature was successfully created.', ['feature' => __('Product')]));
