@@ -51,7 +51,7 @@
             <input type="text" placeholder="{{ __('Search') }}" wire:model.live='search'
                 class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding p-3 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-orange-950 focus:outline-none" />
         </div>
-        <div class="justify-center row">
+        <div class="justify-start row">
             @forelse ($products as $product)
                 <div class="w-1/2 lg:w-1/4">
                     <div class="relative px-2 py-4 mx-2 mb-4 overflow-hidden duration-300 rounded-lg group lg:mt-6 lg:mx-3 lg:px-3 lg:py-6 wow fadeIn"
