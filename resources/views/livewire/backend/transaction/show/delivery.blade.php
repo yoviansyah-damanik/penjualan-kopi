@@ -52,38 +52,38 @@
         </div>
     @else
         <div class="my-3 border-t"></div>
-        <form wire:submit="store_delivery">
-            <div class="space-y-4">
-                <div>
-                    <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        {{ __('Delivery Code') }}
-                    </label>
-                    <input type="text" wire:model='code' id="code"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                        placeholder="123456" required="">
-                    @error('code')
-                        <div class="mt-1 text-sm text-red-700">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div>
-                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        {{ __('Description') }}
-                    </label>
-                    <input type="text" wire:model='description' id="description"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">
-                    @error('description')
-                        <div class="mt-1 text-sm text-red-700">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <button type="submit"
-                    class="text-white justify-center bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
-                    {{ __('Save') }}
-                </button>
-            </div>
-        </form>
     @endif
+    <form wire:submit="store_delivery">
+        <div class="space-y-4">
+            <div>
+                <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    {{ __('Delivery Code') }}
+                </label>
+                <input type="text" wire:model='code' id="code"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                    placeholder="123456" required="">
+                @error('code')
+                    <div class="mt-1 text-sm text-red-700">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div>
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    {{ __('Description') }}
+                </label>
+                <input type="text" wire:model='description' id="description"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">
+                @error('description')
+                    <div class="mt-1 text-sm text-red-700">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <button type="submit"
+                class="text-white justify-center bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
+                {{ __('Save') }}
+            </button>
+        </div>
+    </form>
 </div>
