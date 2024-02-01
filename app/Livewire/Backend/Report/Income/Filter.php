@@ -53,11 +53,10 @@ class Filter extends Component
         $this->clear_preview();
         try {
             $this->set_data();
-            $this->dispatch('set_preview', ['type' => $this->type, 'month' => $this->month, 'year' => $this->year, 'products' => $this->products]);
         } catch (\Exception $e) {
-            $this->alert('error', __('Something went wrong!'));
+            $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
         } catch (\Throwable $e) {
-            $this->alert('error', __('Something went wrong!'));
+            $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
         }
     }
 
@@ -101,6 +100,12 @@ class Filter extends Component
 
     protected function set_data()
     {
-        $this->products = ProductSalesRepository::getAllWithHighestIncome($this->type, $this->month, $this->year);
+        $products = ProductSalesRepository::getAllWithHighestIncome($this->type, $this->month, $this->year);
+        if (!count($products['results'])) {
+            $this->alert('warning', __('No :data found.', ['data' => __('product')]));
+        } else {
+            $this->products = $products;
+            $this->dispatch('set_preview', ['type' => $this->type, 'month' => $this->month, 'year' => $this->year, 'products' => $this->products]);
+        }
     }
 }
