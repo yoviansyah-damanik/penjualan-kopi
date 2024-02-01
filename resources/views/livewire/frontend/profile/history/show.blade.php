@@ -146,7 +146,7 @@
                                 <div class="flex flex-wrap items-center overflow-hidden">
                                     <div class="flex-grow-0 flex-shrink-0 basis-[90px]">
                                         <img class="w-full aspect-square"
-                                            src="{{ $detail->product->main_image ?? Vite::image('product-default.png') }}"
+                                            src="{{ $detail->product->main_image_path ?? Vite::image('product-default.png') }}"
                                             alt="{{ $detail->product->name }} Image">
                                     </div>
                                     <div
