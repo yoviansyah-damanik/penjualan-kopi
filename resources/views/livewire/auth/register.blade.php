@@ -93,15 +93,13 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="min-h-6 pl-7 mb-0.5 block">
-                                <input
-                                    class="w-4.8 h-4.8 ease -ml-7 rounded-1.4 checked:bg-gradient-to-tl checked:from-orange-500 checked:to-orange-950 after:text-xxs after:font-awesome after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
-                                    type="checkbox" id="termsAndConditions"
-                                    wire:model.defer.debounce.250ms='terms_and_conditions' wire:loading.attr='disabled'
-                                    required wire:target='register' />
-                                <label for="termsAndConditions"
-                                    class="mb-2 ml-1 text-sm font-normal cursor-pointer text-slate-700"
-                                    for="flexCheckDefault">
+                            <div class="flex items-center pl-12 mb-0.5 text-left min-h-6">
+                                <input id="termsAndConditions" wire:model.defer.debounce.250ms='terms_and_conditions'
+                                    wire:loading.attr='disabled' wire:target='register' required
+                                    class="mt-0.5 rounded-2xl duration-250 ease-in-out after:rounded-circle after:shadow-2xl after:duration-250 checked:after:translate-x-5.3 h-5 relative float-left -ml-12 w-10 cursor-pointer appearance-none border border-solid border-gray-200 bg-zinc-700/10 bg-none bg-contain bg-left bg-no-repeat align-top transition-all after:absolute after:top-px after:h-4 after:w-4 after:translate-x-px after:bg-white after:content-[''] checked:border-orange-950/95 checked:bg-orange-950/95 checked:bg-none checked:bg-right"
+                                    type="checkbox" />
+                                <label class="ml-2 text-sm font-normal cursor-pointer select-none text-slate-700"
+                                    for="termsAndConditions">
                                     {{ __('I agree the') }} <a href="javascript:;"
                                         class="font-bold text-slate-700">{{ __('Terms and Conditions') }}</a>
                                 </label>

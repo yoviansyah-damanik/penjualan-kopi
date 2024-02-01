@@ -78,7 +78,8 @@ class Register extends Component
                 __('The :feature was successfully registered.', ['feature' => __('Account')]),
                 ['text' => __('You will be directed to the login page. Please wait.')]
             );
-            $this->dispatch('successRegisterHandler');
+
+            return $this->redirect(route('login'), navigate: true);
         } catch (Exception $e) {
             $this->alert('warning', __('Something went wrong!'), ['text' => $e->getMessage()]);
         } catch (Throwable $e) {
@@ -89,10 +90,5 @@ class Register extends Component
     public function disable_submit_button()
     {
         $this->submit_button = false;
-    }
-
-    public function redirect_to_login()
-    {
-        return $this->redirect(route('login'), navigate: false);
     }
 }
