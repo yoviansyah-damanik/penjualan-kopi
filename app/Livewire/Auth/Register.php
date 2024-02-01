@@ -93,6 +93,6 @@ class Register extends Component
 
     public function redirect_to_login()
     {
-        return $this->redirect(route('login'), navigate: true);
+        return $this->redirect(route('login'), navigate: false);
     }
 }

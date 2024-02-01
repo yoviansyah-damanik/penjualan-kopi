@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="justify-center row">
+        <div class="justify-start row">
             @forelse ($products as $product)
                 <div class="w-1/2 lg:w-1/4">
                     <div class="relative px-2 py-4 mx-2 mb-4 overflow-hidden duration-300 rounded-lg group lg:mt-6 lg:mx-3 lg:px-3 lg:py-6 wow fadeIn"
