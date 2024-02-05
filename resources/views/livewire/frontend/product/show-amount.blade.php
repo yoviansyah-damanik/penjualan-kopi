@@ -37,7 +37,7 @@
             </svg>
         </button>
         <span class="px-3 w-[80px] text-center">
-            {{ $amount }}
+            {{ $qty }}
         </span>
         <button wire:click='increment' wire:loading.attr='disabled' wire:target='increment,decrement,delete'
             class="focus:outline-none transition duration-150 bg-orange-500 rounded-md w-[30px] flex justify-center items-center aspect-square hover:bg-orange-950">
@@ -56,7 +56,7 @@
             {{ __('Add to cart') }}
         </a>
     @else
-        <button wire:click="$dispatch('add_to_cart',{product:'{{ $product->slug }}', amount:{{ $amount }}})"
+        <button wire:click="$dispatch('add_to_cart',{product:'{{ $product->slug }}', qty:{{ $qty }}})"
             wire:loading.attr='disabled' wire:target='add_to_cart'
             class="mt-4 bg-[#991b1b] rounded-lg text-white w-full py-2 px-5 flex items-center justify-center gap-2 hover:bg-[#3C2A21] transition duration-100">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">

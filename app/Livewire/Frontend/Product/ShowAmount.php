@@ -7,7 +7,7 @@ use Livewire\Component;
 class ShowAmount extends Component
 {
     public $product;
-    public $amount = 1;
+    public $qty = 1;
 
     public function mount($product)
     {
@@ -20,12 +20,12 @@ class ShowAmount extends Component
 
     public function increment()
     {
-        $this->amount++;
+        $this->qty++;
     }
 
     public function decrement()
     {
-        if ($this->amount > 1)
-            $this->amount--;
+        if ($this->qty > 1)
+            $this->qty--;
     }
 }
