@@ -54,10 +54,10 @@
         <div class="items-stretch justify-start row">
             @forelse ($products as $product)
                 <div class="w-1/2 lg:w-1/4">
-                    <div class="mx-2 mb-3 duration-300 bg-white group lg:mt-3 lg:mx-3 wow fadeIn" data-wow-duration="1s"
+                    <div class="mx-2 mb-3 duration-300 group lg:mt-3 lg:mx-3 wow fadeIn" data-wow-duration="1s"
                         data-wow-delay="0.2s">
                         <div
-                            class="relative flex items-center justify-center w-full overflow-hidden rounded-lg aspect-square">
+                            class="relative flex items-center bg-white justify-center w-full overflow-hidden rounded-t-lg aspect-square">
                             <img @class([
                                 'duration-300',
                                 'group-hover:scale-125',
@@ -95,7 +95,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="pb-4 mt-3">
+                        <div class="pb-4 pt-3 bg-gray-50 rounded-b-lg">
                             <h4
                                 class="block px-3 overflow-hidden text-base font-bold text-gray-900 lg:text-xl text-ellipsis whitespace-nowrap">
                                 {{ $product->name }}
